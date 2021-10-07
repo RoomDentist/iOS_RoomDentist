@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		773211802700D0E300B27A46 /* ResetIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7732117F2700D0E300B27A46 /* ResetIDViewController.swift */; };
+		7737134A26A9CB5800EE6523 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7737134926A9CB5800EE6523 /* JoinViewController.swift */; };
+		7737134C26AAD57600EE6523 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7737134B26AAD57600EE6523 /* MainViewController.swift */; };
+		7737134E26AB088500EE6523 /* CharSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7737134D26AB088500EE6523 /* CharSet.swift */; };
+		7737134F26AB0B4C00EE6523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77390AFF26A84F17004100E3 /* Main.storyboard */; };
+		7737135126AD3AAD00EE6523 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7737135026AD3AAD00EE6523 /* LoginViewModel.swift */; };
+		77390AFA26A84F17004100E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77390AF926A84F17004100E3 /* AppDelegate.swift */; };
+		77390AFC26A84F17004100E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77390AFB26A84F17004100E3 /* SceneDelegate.swift */; };
+		77390AFE26A84F17004100E3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77390AFD26A84F17004100E3 /* LoginViewController.swift */; };
+		77390B0326A84F18004100E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77390B0226A84F18004100E3 /* Assets.xcassets */; };
+		77390B0626A84F18004100E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77390B0426A84F18004100E3 /* LaunchScreen.storyboard */; };
+		77390B1426A86BFF004100E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77390B1326A86BFF004100E3 /* GoogleService-Info.plist */; };
+		77390B1626A87AB9004100E3 /* SwiftDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77390B1526A87AB9004100E3 /* SwiftDebug.swift */; };
+		77537727270F1F4500560AA1 /* userData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537726270F1F4500560AA1 /* userData.swift */; };
+		77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537728270F210F00560AA1 /* DefaultStyle.swift */; };
+		7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753772A270F26C500560AA1 /* LoginSegue.swift */; };
+		823384B795803D47CF192E3F /* libPods-RoomDentist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD598A0032DEB24C0B33F6AF /* libPods-RoomDentist.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1DFDD0127FFE420CA10C0A3A /* Pods-RoomDentist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomDentist.debug.xcconfig"; path = "Target Support Files/Pods-RoomDentist/Pods-RoomDentist.debug.xcconfig"; sourceTree = "<group>"; };
+		2C40433FEC26AD801DD7F5A5 /* Pods-RoomDentist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomDentist.release.xcconfig"; path = "Target Support Files/Pods-RoomDentist/Pods-RoomDentist.release.xcconfig"; sourceTree = "<group>"; };
+		7732117F2700D0E300B27A46 /* ResetIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetIDViewController.swift; sourceTree = "<group>"; };
+		7737134926A9CB5800EE6523 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		7737134B26AAD57600EE6523 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7737134D26AB088500EE6523 /* CharSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharSet.swift; sourceTree = "<group>"; };
+		7737135026AD3AAD00EE6523 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		77390AF626A84F17004100E3 /* RoomDentist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoomDentist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77390AF926A84F17004100E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		77390AFB26A84F17004100E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		77390AFD26A84F17004100E3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		77390B0026A84F17004100E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		77390B0226A84F18004100E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		77390B0526A84F18004100E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		77390B0726A84F18004100E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77390B1326A86BFF004100E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		77390B1526A87AB9004100E3 /* SwiftDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftDebug.swift; path = RoomDentist/App/SwiftDebug.swift; sourceTree = SOURCE_ROOT; };
+		77537726270F1F4500560AA1 /* userData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userData.swift; sourceTree = "<group>"; };
+		77537728270F210F00560AA1 /* DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStyle.swift; sourceTree = "<group>"; };
+		7753772A270F26C500560AA1 /* LoginSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSegue.swift; sourceTree = "<group>"; };
+		DD598A0032DEB24C0B33F6AF /* libPods-RoomDentist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoomDentist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		77390AF326A84F17004100E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				823384B795803D47CF192E3F /* libPods-RoomDentist.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		507F3C644246F25CD268B1DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD598A0032DEB24C0B33F6AF /* libPods-RoomDentist.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77390AED26A84F17004100E3 = {
+			isa = PBXGroup;
+			children = (
+				77390AF826A84F17004100E3 /* RoomDentist */,
+				77390AF726A84F17004100E3 /* Products */,
+				911680F7D11D90B3114DA179 /* Pods */,
+				507F3C644246F25CD268B1DE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		77390AF726A84F17004100E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				77390AF626A84F17004100E3 /* RoomDentist.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		77390AF826A84F17004100E3 /* RoomDentist */ = {
+			isa = PBXGroup;
+			children = (
+				77390B1226A86AA6004100E3 /* App */,
+				77390B1126A86A9F004100E3 /* ViewController */,
+				77390B1026A86A93004100E3 /* ViewModels */,
+				77390B0F26A86A8E004100E3 /* View */,
+				77390B0E26A86A7E004100E3 /* Utils */,
+				7753772C270F26CE00560AA1 /* CustomSegue */,
+				77390B0D26A86A63004100E3 /* Models */,
+				77390B0226A84F18004100E3 /* Assets.xcassets */,
+				77390B0726A84F18004100E3 /* Info.plist */,
+				77390B1326A86BFF004100E3 /* GoogleService-Info.plist */,
+			);
+			path = RoomDentist;
+			sourceTree = "<group>";
+		};
+		77390B0D26A86A63004100E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7737134D26AB088500EE6523 /* CharSet.swift */,
+				77537726270F1F4500560AA1 /* userData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		77390B0E26A86A7E004100E3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				77537728270F210F00560AA1 /* DefaultStyle.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		77390B0F26A86A8E004100E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77390B1026A86A93004100E3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7737135026AD3AAD00EE6523 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		77390B1126A86A9F004100E3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				77390AFD26A84F17004100E3 /* LoginViewController.swift */,
+				7737134B26AAD57600EE6523 /* MainViewController.swift */,
+				7732117F2700D0E300B27A46 /* ResetIDViewController.swift */,
+				7737134926A9CB5800EE6523 /* JoinViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		77390B1226A86AA6004100E3 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				77390AF926A84F17004100E3 /* AppDelegate.swift */,
+				77390AFB26A84F17004100E3 /* SceneDelegate.swift */,
+				77390AFF26A84F17004100E3 /* Main.storyboard */,
+				77390B0426A84F18004100E3 /* LaunchScreen.storyboard */,
+				77390B1526A87AB9004100E3 /* SwiftDebug.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7753772C270F26CE00560AA1 /* CustomSegue */ = {
+			isa = PBXGroup;
+			children = (
+				7753772A270F26C500560AA1 /* LoginSegue.swift */,
+			);
+			path = CustomSegue;
+			sourceTree = "<group>";
+		};
+		911680F7D11D90B3114DA179 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1DFDD0127FFE420CA10C0A3A /* Pods-RoomDentist.debug.xcconfig */,
+				2C40433FEC26AD801DD7F5A5 /* Pods-RoomDentist.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		77390AF526A84F17004100E3 /* RoomDentist */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77390B0A26A84F18004100E3 /* Build configuration list for PBXNativeTarget "RoomDentist" */;
+			buildPhases = (
+				17203E9FD44DE1044900E75B /* [CP] Check Pods Manifest.lock */,
+				77390AF226A84F17004100E3 /* Sources */,
+				77390AF326A84F17004100E3 /* Frameworks */,
+				77390AF426A84F17004100E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RoomDentist;
+			productName = RoomDentist;
+			productReference = 77390AF626A84F17004100E3 /* RoomDentist.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		77390AEE26A84F17004100E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					77390AF526A84F17004100E3 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+				};
+			};
+			buildConfigurationList = 77390AF126A84F17004100E3 /* Build configuration list for PBXProject "RoomDentist" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 77390AED26A84F17004100E3;
+			productRefGroup = 77390AF726A84F17004100E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				77390AF526A84F17004100E3 /* RoomDentist */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		77390AF426A84F17004100E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7737134F26AB0B4C00EE6523 /* Main.storyboard in Resources */,
+				77390B0626A84F18004100E3 /* LaunchScreen.storyboard in Resources */,
+				77390B1426A86BFF004100E3 /* GoogleService-Info.plist in Resources */,
+				77390B0326A84F18004100E3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17203E9FD44DE1044900E75B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RoomDentist-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		77390AF226A84F17004100E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				773211802700D0E300B27A46 /* ResetIDViewController.swift in Sources */,
+				7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */,
+				77390AFE26A84F17004100E3 /* LoginViewController.swift in Sources */,
+				77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */,
+				77390AFA26A84F17004100E3 /* AppDelegate.swift in Sources */,
+				77390AFC26A84F17004100E3 /* SceneDelegate.swift in Sources */,
+				7737134C26AAD57600EE6523 /* MainViewController.swift in Sources */,
+				7737135126AD3AAD00EE6523 /* LoginViewModel.swift in Sources */,
+				7737134A26A9CB5800EE6523 /* JoinViewController.swift in Sources */,
+				7737134E26AB088500EE6523 /* CharSet.swift in Sources */,
+				77537727270F1F4500560AA1 /* userData.swift in Sources */,
+				77390B1626A87AB9004100E3 /* SwiftDebug.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		77390AFF26A84F17004100E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77390B0026A84F17004100E3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		77390B0426A84F18004100E3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77390B0526A84F18004100E3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		77390B0826A84F18004100E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		77390B0926A84F18004100E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		77390B0B26A84F18004100E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DFDD0127FFE420CA10C0A3A /* Pods-RoomDentist.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RoomDentist/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+					"-l\"FirebaseAuth\"",
+					"-l\"FirebaseCore\"",
+					"-l\"FirebaseCoreDiagnostics\"",
+					"-l\"FirebaseDatabase\"",
+					"-l\"FirebaseInstallations\"",
+					"-l\"FirebaseStorage\"",
+					"-l\"GTMSessionFetcher\"",
+					"-l\"GoogleDataTransport\"",
+					"-l\"GoogleUtilities\"",
+					"-l\"PromisesObjC\"",
+					"-l\"SnapKit\"",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"leveldb-library\"",
+					"-l\"nanopb\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tunahouse97.RoomDentist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		77390B0C26A84F18004100E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C40433FEC26AD801DD7F5A5 /* Pods-RoomDentist.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RoomDentist/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+					"-l\"FirebaseAuth\"",
+					"-l\"FirebaseCore\"",
+					"-l\"FirebaseCoreDiagnostics\"",
+					"-l\"FirebaseDatabase\"",
+					"-l\"FirebaseInstallations\"",
+					"-l\"FirebaseStorage\"",
+					"-l\"GTMSessionFetcher\"",
+					"-l\"GoogleDataTransport\"",
+					"-l\"GoogleUtilities\"",
+					"-l\"PromisesObjC\"",
+					"-l\"SnapKit\"",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"leveldb-library\"",
+					"-l\"nanopb\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tunahouse97.RoomDentist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		77390AF126A84F17004100E3 /* Build configuration list for PBXProject "RoomDentist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77390B0826A84F18004100E3 /* Debug */,
+				77390B0926A84F18004100E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77390B0A26A84F18004100E3 /* Build configuration list for PBXNativeTarget "RoomDentist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77390B0B26A84F18004100E3 /* Debug */,
+				77390B0C26A84F18004100E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 77390AEE26A84F17004100E3 /* Project object */;
+}

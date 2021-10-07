@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k3I-pB-q8Q">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="ZJ9-K8-6TP">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PSW-du-QLw" customClass="LoginViewController" customModule="RoomDentist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gc0-8Z-zvM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yjD-4M-Zsk"/>
+                        <color key="backgroundColor" name="SkyBlue"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="b5z-3w-3En"/>
+                    <connections>
+                        <segue destination="1hp-Nt-0R4" kind="presentation" identifier="JoinSegue" id="7TX-8i-IzK"/>
+                        <segue destination="YKH-Uh-jm2" kind="show" identifier="MainSegue" customClass="LoginSegue" customModule="RoomDentist" customModuleProvider="target" animates="NO" id="B0O-bs-bzw"/>
+                        <segue destination="R83-gW-t5v" kind="presentation" identifier="ResetSegue" id="R2b-Ia-CGg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cUw-f7-yHE" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054" y="834"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="ZO5-AX-489">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="YKH-Uh-jm2" customClass="MainViewController" customModule="RoomDentist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KpH-lA-n8E">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="iho-fv-5Mj"/>
+                        <color key="backgroundColor" name="Background"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YVd-Gd-sit"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pcb-84-xhh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054" y="1560"/>
+        </scene>
+        <!--Join View Controller-->
+        <scene sceneID="QzM-4t-yIv">
+            <objects>
+                <viewController storyboardIdentifier="JoinViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1hp-Nt-0R4" customClass="JoinViewController" customModule="RoomDentist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aLI-Il-VSl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7w1-db-6kP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="weC-aq-VEw"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7w1-db-6kP" firstAttribute="top" secondItem="weC-aq-VEw" secondAttribute="top" id="2ZS-cw-xp1"/>
+                            <constraint firstItem="7w1-db-6kP" firstAttribute="leading" secondItem="weC-aq-VEw" secondAttribute="leading" id="Hb4-zT-vo8"/>
+                            <constraint firstItem="weC-aq-VEw" firstAttribute="bottom" secondItem="7w1-db-6kP" secondAttribute="bottom" id="bvh-Dp-sOp"/>
+                            <constraint firstItem="weC-aq-VEw" firstAttribute="trailing" secondItem="7w1-db-6kP" secondAttribute="trailing" id="f4b-bQ-bbZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3tD-YU-JzO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="492"/>
+        </scene>
+        <!--ResetID View Controller-->
+        <scene sceneID="85I-XW-g9m">
+            <objects>
+                <viewController id="R83-gW-t5v" customClass="ResetIDViewController" customModule="RoomDentist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3bl-LA-6IT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Tgo-uK-R9o"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ebf-Qj-khW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="1202"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GHj-tL-sKY">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="k3I-pB-q8Q" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wz5-Uz-WNt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XKs-FH-E4h">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="PSW-du-QLw" kind="relationship" relationship="rootViewController" id="3Mm-zG-91L"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yY7-z1-zSi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="161" y="834"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.95599997043609619" green="0.90799999237060547" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="SkyBlue">
+            <color red="0.89899998903274536" green="0.95999997854232788" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>
