@@ -58,6 +58,11 @@ PODS:
   - FirebaseStorage (8.4.0):
     - FirebaseCore (~> 8.0)
     - GTMSessionFetcher/Core (~> 1.5)
+  - FirebaseStorageUI (12.0.0):
+    - FirebaseStorage (~> 8.0)
+    - SDWebImage (~> 5.6)
+  - FirebaseUI/Storage (12.0.2):
+    - FirebaseStorageUI (~> 12.0)
   - GoogleAppMeasurement (8.4.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.4.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
@@ -95,7 +100,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.0)
-  - Kingfisher (7.0.0)
+  - Kingfisher (6.3.1)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -103,6 +108,9 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - SDWebImage (5.12.0):
+    - SDWebImage/Core (= 5.12.0)
+  - SDWebImage/Core (5.12.0)
   - SnapKit (5.0.1)
   - TextFieldEffects (1.6.0)
 
@@ -111,7 +119,8 @@ DEPENDENCIES:
   - Firebase/Auth (~> 8.4.0)
   - Firebase/Database (~> 8.4.0)
   - Firebase/Storage (~> 8.4.0)
-  - Kingfisher (~> 7.0)
+  - FirebaseUI/Storage
+  - Kingfisher (~> 6.0)
   - SnapKit (~> 5.0.0)
   - TextFieldEffects
 
@@ -125,6 +134,8 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseInstallations
     - FirebaseStorage
+    - FirebaseStorageUI
+    - FirebaseUI
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -133,6 +144,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SDWebImage
     - SnapKit
     - TextFieldEffects
 
@@ -145,17 +157,20 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 38f21731dea277e454060d0d39c1bf2aaa12bbb9
   FirebaseInstallations: 2563cb18a723ef9c6ef18318a49519b75dce613c
   FirebaseStorage: e6065bcbf70e2a06a8c3ddc66cbe03a395bbddc4
+  FirebaseStorageUI: 9f5b32264e77dc073dec45f00c5b3a77e5ca901e
+  FirebaseUI: b04b32ead3a6dcd5a50829e14b8f3f6d044d5d62
   GoogleAppMeasurement: 6b6a08fd9c71f4dbc89e0e812acca81d797aa342
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
-  Kingfisher: 5efc54fec3980f92354898532e562cc17f31efb4
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SDWebImage: 4ea20cca2986adc5aacde07aa686742fd4c67a37
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 5877304d7ced1eb26385a3b0b0be443ca75bd385
+PODFILE CHECKSUM: 36e159ef1421d57ba7e547e048de0521c618bd44
 
 COCOAPODS: 1.11.2

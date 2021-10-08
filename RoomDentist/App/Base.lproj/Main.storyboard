@@ -36,14 +36,30 @@
                     <view key="view" contentMode="scaleToFill" id="KpH-lA-n8E">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CircleIcon" translatesAutoresizingMaskIntoConstraints="NO" id="L7Z-8P-88K">
+                                <rect key="frame" x="0.0" y="0.0" width="220" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="L7Z-8P-88K" secondAttribute="height" multiplier="11:13" id="3Ln-jX-pNK"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="o37-QE-mJe"/>
+                                    <constraint firstAttribute="width" constant="220" id="qSN-xK-kgl"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="iho-fv-5Mj"/>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="L7Z-8P-88K" firstAttribute="leading" secondItem="iho-fv-5Mj" secondAttribute="leading" id="6BL-gO-zqv"/>
+                            <constraint firstItem="L7Z-8P-88K" firstAttribute="leading" secondItem="iho-fv-5Mj" secondAttribute="leading" id="7na-DH-uMl"/>
+                            <constraint firstItem="L7Z-8P-88K" firstAttribute="top" secondItem="KpH-lA-n8E" secondAttribute="top" id="Pj7-Uk-PiS"/>
+                            <constraint firstItem="L7Z-8P-88K" firstAttribute="top" secondItem="KpH-lA-n8E" secondAttribute="top" id="ZkH-aa-UDr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YVd-Gd-sit"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pcb-84-xhh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="1560"/>
+            <point key="canvasLocation" x="1053.6231884057972" y="1559.5982142857142"/>
         </scene>
         <!--Join View Controller-->
         <scene sceneID="QzM-4t-yIv">
@@ -107,9 +123,7 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Background">
-            <color red="0.95599997043609619" green="0.90799999237060547" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
+        <image name="CircleIcon" width="169" height="200"/>
         <namedColor name="SkyBlue">
             <color red="0.89899998903274536" green="0.95999997854232788" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

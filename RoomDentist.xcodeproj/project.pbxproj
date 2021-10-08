@@ -23,6 +23,10 @@
 		77537727270F1F4500560AA1 /* userData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537726270F1F4500560AA1 /* userData.swift */; };
 		77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537728270F210F00560AA1 /* DefaultStyle.swift */; };
 		7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753772A270F26C500560AA1 /* LoginSegue.swift */; };
+		77537732271084A300560AA1 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537731271084A300560AA1 /* UserData.swift */; };
+		77B7FFA42710B19800B2D31B /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77B7FFA12710B19800B2D31B /* GmarketSansLight.otf */; };
+		77B7FFA52710B19800B2D31B /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77B7FFA22710B19800B2D31B /* GmarketSansBold.otf */; };
+		77B7FFA62710B19800B2D31B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77B7FFA32710B19800B2D31B /* GmarketSansMedium.otf */; };
 		823384B795803D47CF192E3F /* libPods-RoomDentist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD598A0032DEB24C0B33F6AF /* libPods-RoomDentist.a */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +51,10 @@
 		77537726270F1F4500560AA1 /* userData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userData.swift; sourceTree = "<group>"; };
 		77537728270F210F00560AA1 /* DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStyle.swift; sourceTree = "<group>"; };
 		7753772A270F26C500560AA1 /* LoginSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSegue.swift; sourceTree = "<group>"; };
+		77537731271084A300560AA1 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		77B7FFA12710B19800B2D31B /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
+		77B7FFA22710B19800B2D31B /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
+		77B7FFA32710B19800B2D31B /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		DD598A0032DEB24C0B33F6AF /* libPods-RoomDentist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoomDentist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -91,6 +99,7 @@
 		77390AF826A84F17004100E3 /* RoomDentist */ = {
 			isa = PBXGroup;
 			children = (
+				77B7FFA02710B18800B2D31B /* Resource */,
 				77390B1226A86AA6004100E3 /* App */,
 				77390B1126A86A9F004100E3 /* ViewController */,
 				77390B1026A86A93004100E3 /* ViewModels */,
@@ -118,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				77537728270F210F00560AA1 /* DefaultStyle.swift */,
+				77537731271084A300560AA1 /* UserData.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -141,9 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				77390AFD26A84F17004100E3 /* LoginViewController.swift */,
-				7737134B26AAD57600EE6523 /* MainViewController.swift */,
 				7732117F2700D0E300B27A46 /* ResetIDViewController.swift */,
 				7737134926A9CB5800EE6523 /* JoinViewController.swift */,
+				7737134B26AAD57600EE6523 /* MainViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -166,6 +176,16 @@
 				7753772A270F26C500560AA1 /* LoginSegue.swift */,
 			);
 			path = CustomSegue;
+			sourceTree = "<group>";
+		};
+		77B7FFA02710B18800B2D31B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				77B7FFA22710B19800B2D31B /* GmarketSansBold.otf */,
+				77B7FFA12710B19800B2D31B /* GmarketSansLight.otf */,
+				77B7FFA32710B19800B2D31B /* GmarketSansMedium.otf */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		911680F7D11D90B3114DA179 /* Pods */ = {
@@ -236,8 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7737134F26AB0B4C00EE6523 /* Main.storyboard in Resources */,
+				77B7FFA52710B19800B2D31B /* GmarketSansBold.otf in Resources */,
 				77390B0626A84F18004100E3 /* LaunchScreen.storyboard in Resources */,
+				77B7FFA42710B19800B2D31B /* GmarketSansLight.otf in Resources */,
 				77390B1426A86BFF004100E3 /* GoogleService-Info.plist in Resources */,
+				77B7FFA62710B19800B2D31B /* GmarketSansMedium.otf in Resources */,
 				77390B0326A84F18004100E3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77537732271084A300560AA1 /* UserData.swift in Sources */,
 				773211802700D0E300B27A46 /* ResetIDViewController.swift in Sources */,
 				7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */,
 				77390AFE26A84F17004100E3 /* LoginViewController.swift in Sources */,

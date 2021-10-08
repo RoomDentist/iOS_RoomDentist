@@ -93,8 +93,8 @@ class JoinViewController: UIViewController {
         return PwTextFieldRepeat
     }()
     
-    lazy var BirthText: UITextField = {
-        let BirthText = UITextField()
+    lazy var BirthText: UILabel = {
+        let BirthText = UILabel()
         BirthText.text = "생일"
         BirthText.textColor = UIColor(named: "Brown")!
         return BirthText
@@ -106,8 +106,8 @@ class JoinViewController: UIViewController {
         return BirthTextField
     }()
     
-    lazy var genderText: UITextField = {
-        let genderText = UITextField()
+    lazy var genderText: UILabel = {
+        let genderText = UILabel()
         genderText.text = "성별"
         genderText.textColor = UIColor(named: "Brown")!
         return genderText
@@ -452,12 +452,14 @@ extension JoinViewController {
     }
     
     func saveUserData() {
-        let dataMap = [ "username": NameTextField.text,
-                     "email": EmailTextField.text,
-                     "birth": BirthTextField.text,
-                     "gender": genderText.text
-        ]
+        segmentValueUpdate()
         let uid = Auth.auth().currentUser?.uid
+        let dataMap = [
+            "username": NameTextField.text,
+            "email": EmailTextField.text,
+            "birth": BirthTextField.text,
+            "gender": genderText.text
+        ]
         db.child("users").child(uid!).setValue(dataMap)
     }
     

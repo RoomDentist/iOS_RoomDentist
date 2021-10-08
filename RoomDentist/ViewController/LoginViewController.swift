@@ -210,7 +210,7 @@ extension LoginViewController {
         view.endEditing(true)
         
         Auth.auth().signIn(withEmail: EmailTextField.text!, password: PwTextField.text!) { [weak self] authResult, error in
-            if error != nil{
+            if error != nil {
                 if let ErrorCode = AuthErrorCode(rawValue: (error?._code)!) {
                     switch ErrorCode {
                     case AuthErrorCode.operationNotAllowed:
