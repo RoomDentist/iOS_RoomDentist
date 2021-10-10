@@ -23,8 +23,8 @@ class JoinViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "방구석 Dentist 회원가입"
-        titleLabel.tintColor = UIColor(named: "Brown")!
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        titleLabel.textColor = UIColor(named: "Brown")!
+        titleLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return titleLabel
     }()
     
@@ -34,6 +34,7 @@ class JoinViewController: UIViewController {
         NameTextField.placeholder = "이름"
         NameTextField.borderColor = .systemOrange
         NameTextField.textColor = .black
+        NameTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         NameTextField.placeholderFontScale = CGFloat(1)
         NameTextField.autocapitalizationType = .none
         NameTextField.autocorrectionType = .no
@@ -49,6 +50,7 @@ class JoinViewController: UIViewController {
         EmailTextField.keyboardType = .emailAddress
         EmailTextField.borderColor = .systemOrange
         EmailTextField.textColor = .black
+        EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         EmailTextField.placeholderFontScale = CGFloat(1)
         EmailTextField.autocapitalizationType = .none
         EmailTextField.autocorrectionType = .no
@@ -61,7 +63,7 @@ class JoinViewController: UIViewController {
         SendEmailButton.isEnabled = false
         SendEmailButton.setTitleColor(UIColor(named: "Brown"), for: .normal)
         SendEmailButton.setTitle("이메일 인증", for: .normal)
-        SendEmailButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        SendEmailButton.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(13))
         return SendEmailButton
     }()
     
@@ -71,6 +73,7 @@ class JoinViewController: UIViewController {
         PwTextField.placeholder = "비밀번호"
         PwTextField.borderColor = .systemOrange
         PwTextField.textColor = .black
+        PwTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         PwTextField.placeholderFontScale = CGFloat(1)
         PwTextField.autocapitalizationType = .none
         PwTextField.autocorrectionType = .no
@@ -85,6 +88,7 @@ class JoinViewController: UIViewController {
         PwTextFieldRepeat.placeholder = "비밀번호 재입력"
         PwTextFieldRepeat.borderColor = .systemOrange
         PwTextFieldRepeat.textColor = .black
+        PwTextFieldRepeat.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         PwTextFieldRepeat.placeholderFontScale = CGFloat(1)
         PwTextFieldRepeat.autocapitalizationType = .none
         PwTextFieldRepeat.autocorrectionType = .no
@@ -97,6 +101,7 @@ class JoinViewController: UIViewController {
         let BirthText = UILabel()
         BirthText.text = "생일"
         BirthText.textColor = UIColor(named: "Brown")!
+        BirthText.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return BirthText
     }()
     
@@ -110,12 +115,13 @@ class JoinViewController: UIViewController {
         let genderText = UILabel()
         genderText.text = "성별"
         genderText.textColor = UIColor(named: "Brown")!
+        genderText.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return genderText
     }()
     
     lazy var genderTextField: UITextField = {
         let genderTextField = UITextField()
-        genderTextField.text = ""
+        genderTextField.text = "남성"
         return genderTextField
     }()
     
@@ -142,7 +148,7 @@ class JoinViewController: UIViewController {
         let PwLabel = UILabel()
         PwLabel.text = "비밀번호가 일치하지 않습니다"
         PwLabel.textColor = .systemRed
-        PwLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        PwLabel.font = UIFont(name: "GmarketSansMedium", size: CGFloat(13))
         return PwLabel
     }()
     
@@ -153,7 +159,7 @@ class JoinViewController: UIViewController {
         profileButton.isEnabled = true
         profileButton.backgroundColor = .systemYellow
         profileButton.setTitleColor(.white, for: .normal)
-        profileButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        profileButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return profileButton
     }()
     
@@ -165,7 +171,7 @@ class JoinViewController: UIViewController {
         joinButton.backgroundColor = .systemGray6
         joinButton.setTitleColor(.systemGray, for: .disabled)
         joinButton.setTitleColor(.white, for: .normal)
-        joinButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        joinButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return joinButton
     }()
 
@@ -252,7 +258,7 @@ class JoinViewController: UIViewController {
         }
         
         self.BirthText.snp.makeConstraints {
-            $0.top.equalTo(self.PwLabel.snp.bottom).offset(15)
+            $0.top.equalTo(self.PwLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             $0.right.equalTo(self.BirthTextFieldPicker.snp.left).offset(-20)
         }
@@ -263,7 +269,7 @@ class JoinViewController: UIViewController {
         }
         
         self.genderText.snp.makeConstraints {
-            $0.top.equalTo(self.PwLabel.snp.bottom).offset(15)
+            $0.top.equalTo(self.PwLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.BirthTextFieldPicker.snp.right).offset(20)
             $0.right.equalTo(self.genderSegment.snp.left).offset(-20)
         }
@@ -274,7 +280,7 @@ class JoinViewController: UIViewController {
         }
         
         self.profileButton.snp.makeConstraints {
-            $0.top.equalTo(self.genderSegment.snp.bottom).offset(20)
+            $0.top.equalTo(self.genderSegment.snp.bottom).offset(30)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
@@ -293,18 +299,15 @@ class JoinViewController: UIViewController {
 
 extension JoinViewController {
     @objc func onDidChangeDate(sender: UIDatePicker){
-        // Generate the format.
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         
-    // Obtain the date according to the format.
         let selectedDate: String = dateFormatter.string(from: sender.date)
         self.BirthTextField.text = selectedDate
     }
     
     @objc func uploadPhoto() {
         let imagePicker = UIImagePickerController()
-        print("실행완료")
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self //3
         imagePicker.allowsEditing = true

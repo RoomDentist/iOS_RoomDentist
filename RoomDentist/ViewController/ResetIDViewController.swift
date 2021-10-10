@@ -15,7 +15,7 @@ class ResetIDViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = "방구석 Dentist 비밀번호 찾기"
         titleLabel.tintColor = UIColor(named: "Brown")!
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        titleLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return titleLabel
     }()
     
@@ -31,6 +31,7 @@ class ResetIDViewController: UIViewController {
         EmailTextField.autocapitalizationType = .none
         EmailTextField.autocorrectionType = .no
         EmailTextField.delegate = self
+        EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return EmailTextField
     }()
     
@@ -42,7 +43,7 @@ class ResetIDViewController: UIViewController {
         findButton.backgroundColor = .systemGray6
         findButton.setTitleColor(.systemGray, for: .disabled)
         findButton.setTitleColor(.white, for: .normal)
-        findButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        findButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return findButton
     }()
     

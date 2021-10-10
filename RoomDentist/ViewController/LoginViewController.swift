@@ -30,6 +30,7 @@ class LoginViewController: UIViewController {
         EmailTextField.keyboardType = .emailAddress
         EmailTextField.borderColor = .systemOrange
         EmailTextField.textColor = .black
+        EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         EmailTextField.placeholderFontScale = CGFloat(1)
         EmailTextField.autocapitalizationType = .none
         EmailTextField.autocorrectionType = .no
@@ -43,6 +44,7 @@ class LoginViewController: UIViewController {
         PwTextField.placeholder = "비밀번호"
         PwTextField.borderColor = .systemOrange
         PwTextField.textColor = .black
+        PwTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         PwTextField.placeholderFontScale = CGFloat(1)
         PwTextField.autocapitalizationType = .none
         PwTextField.autocorrectionType = .no
@@ -56,7 +58,7 @@ class LoginViewController: UIViewController {
         FindPwButton.backgroundColor = UIColor(named: "SkyBlue")
         FindPwButton.setTitleColor(UIColor(named: "Brown"), for: .normal)
         FindPwButton.setTitle("비밀번호 찾기", for: .normal)
-        FindPwButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        FindPwButton.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(13))
         return FindPwButton
     }()
     
@@ -68,7 +70,7 @@ class LoginViewController: UIViewController {
         loginButton.setTitleColor(.systemGray, for: .disabled)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.setTitle("로그인", for: .normal)
-        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        loginButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return loginButton
     }()
     
@@ -77,7 +79,7 @@ class LoginViewController: UIViewController {
         joinButton.layer.cornerRadius = 10
         joinButton.backgroundColor = .systemOrange
         joinButton.setTitle("회원가입", for: .normal)
-        joinButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        joinButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return joinButton
     }()
     
@@ -226,8 +228,7 @@ extension LoginViewController {
                     }
                 }
             } else{
-                print("로그인 성공")
-                self?.performSegue(withIdentifier: "MainSegue", sender: nil)
+                self?.pushNavigationControllerToMain()
             }
         }
     }
@@ -239,12 +240,23 @@ extension LoginViewController {
                 self.configureUI()
                 self.showAlert(message: "사용자 정보가 만료되었습니다. 다시 로그인해주세요")
             } else {
-                self.performSegue(withIdentifier: "MainSegue", sender: nil)
+                self.pushNavigationControllerToMain()
+                self.configureUI()
             }
         })
         if status == nil {
             self.configureUI()
         }
+    }
+    
+    func pushNavigationControllerToMain() {
+        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController")
+        let transition: CATransition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        transition.type = CATransitionType.fade
+        self.navigationController!.view.layer.add(transition, forKey: nil)
+        self.navigationController?.pushViewController(pushVC!, animated: false)
     }
 }
 
@@ -278,7 +290,7 @@ extension LoginViewController: UITextFieldDelegate {
         } else {
             PwFinalText.replaceCharacters(in: range, with: string)
         }
-        print("\(IdFinalText) \(PwFinalText)")
+
         if IdFinalText.length > 4 && PwFinalText.length > 4 {
             loginButton.isEnabled = true
             loginButton.backgroundColor = .systemYellow
@@ -298,7 +310,6 @@ import SwiftUI
 @available(iOS 13, *)
 struct ProfileVCPreview: PreviewProvider {
     static var previews: some View {
-        // Assuming your storyboard file name is "Main"
         Group {
             UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "LoginViewController").toPreview().previewDevice("iPhone 12 Pro")
         }

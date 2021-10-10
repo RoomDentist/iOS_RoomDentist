@@ -24,6 +24,11 @@
 		77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537728270F210F00560AA1 /* DefaultStyle.swift */; };
 		7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753772A270F26C500560AA1 /* LoginSegue.swift */; };
 		77537732271084A300560AA1 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537731271084A300560AA1 /* UserData.swift */; };
+		779B6C0D271181D500016865 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C0C271181D500016865 /* DateModel.swift */; };
+		779B6C0F2711C6F200016865 /* CustomViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C0E2711C6F200016865 /* CustomViewAnimation.swift */; };
+		779B6C112711CE7E00016865 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C102711CE7E00016865 /* CameraPreview.swift */; };
+		779B6C132711CEAA00016865 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C122711CEAA00016865 /* CameraViewController.swift */; };
+		779B6C152711DF1300016865 /* ResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C142711DF1300016865 /* ResultCollectionView.swift */; };
 		77B7FFA42710B19800B2D31B /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77B7FFA12710B19800B2D31B /* GmarketSansLight.otf */; };
 		77B7FFA52710B19800B2D31B /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77B7FFA22710B19800B2D31B /* GmarketSansBold.otf */; };
 		77B7FFA62710B19800B2D31B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77B7FFA32710B19800B2D31B /* GmarketSansMedium.otf */; };
@@ -52,6 +57,11 @@
 		77537728270F210F00560AA1 /* DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStyle.swift; sourceTree = "<group>"; };
 		7753772A270F26C500560AA1 /* LoginSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSegue.swift; sourceTree = "<group>"; };
 		77537731271084A300560AA1 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		779B6C0C271181D500016865 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
+		779B6C0E2711C6F200016865 /* CustomViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewAnimation.swift; sourceTree = "<group>"; };
+		779B6C102711CE7E00016865 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		779B6C122711CEAA00016865 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		779B6C142711DF1300016865 /* ResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionView.swift; sourceTree = "<group>"; };
 		77B7FFA12710B19800B2D31B /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
 		77B7FFA22710B19800B2D31B /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		77B7FFA32710B19800B2D31B /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
@@ -105,7 +115,7 @@
 				77390B1026A86A93004100E3 /* ViewModels */,
 				77390B0F26A86A8E004100E3 /* View */,
 				77390B0E26A86A7E004100E3 /* Utils */,
-				7753772C270F26CE00560AA1 /* CustomSegue */,
+				7753772C270F26CE00560AA1 /* Custom */,
 				77390B0D26A86A63004100E3 /* Models */,
 				77390B0226A84F18004100E3 /* Assets.xcassets */,
 				77390B0726A84F18004100E3 /* Info.plist */,
@@ -135,6 +145,8 @@
 		77390B0F26A86A8E004100E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				779B6C102711CE7E00016865 /* CameraPreview.swift */,
+				779B6C142711DF1300016865 /* ResultCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				7737135026AD3AAD00EE6523 /* LoginViewModel.swift */,
+				779B6C0C271181D500016865 /* DateModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -154,6 +167,7 @@
 				7732117F2700D0E300B27A46 /* ResetIDViewController.swift */,
 				7737134926A9CB5800EE6523 /* JoinViewController.swift */,
 				7737134B26AAD57600EE6523 /* MainViewController.swift */,
+				779B6C122711CEAA00016865 /* CameraViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -170,12 +184,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		7753772C270F26CE00560AA1 /* CustomSegue */ = {
+		7753772C270F26CE00560AA1 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
 				7753772A270F26C500560AA1 /* LoginSegue.swift */,
+				779B6C0E2711C6F200016865 /* CustomViewAnimation.swift */,
 			);
-			path = CustomSegue;
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		77B7FFA02710B18800B2D31B /* Resource */ = {
@@ -298,12 +313,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				77537732271084A300560AA1 /* UserData.swift in Sources */,
+				779B6C0D271181D500016865 /* DateModel.swift in Sources */,
 				773211802700D0E300B27A46 /* ResetIDViewController.swift in Sources */,
+				779B6C132711CEAA00016865 /* CameraViewController.swift in Sources */,
+				779B6C0F2711C6F200016865 /* CustomViewAnimation.swift in Sources */,
 				7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */,
 				77390AFE26A84F17004100E3 /* LoginViewController.swift in Sources */,
 				77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */,
 				77390AFA26A84F17004100E3 /* AppDelegate.swift in Sources */,
 				77390AFC26A84F17004100E3 /* SceneDelegate.swift in Sources */,
+				779B6C112711CE7E00016865 /* CameraPreview.swift in Sources */,
+				779B6C152711DF1300016865 /* ResultCollectionView.swift in Sources */,
 				7737134C26AAD57600EE6523 /* MainViewController.swift in Sources */,
 				7737135126AD3AAD00EE6523 /* LoginViewModel.swift in Sources */,
 				7737134A26A9CB5800EE6523 /* JoinViewController.swift in Sources */,
@@ -458,6 +478,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R29TK2NQQ6;
 				INFOPLIST_FILE = RoomDentist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -519,6 +540,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R29TK2NQQ6;
 				INFOPLIST_FILE = RoomDentist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
