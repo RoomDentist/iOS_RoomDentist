@@ -36,19 +36,6 @@ class MainViewController: UIViewController {
         logoImage.addTarget(self, action: #selector(logout), for: .touchUpInside)
         return logoImage
     }()
-        
-    lazy var emailImageView: UIImageView = {
-        let emailImageView = UIImageView()
-        emailImageView.image = UIImage(named: "BlueBox.png")
-        return emailImageView
-    }()
-
-    lazy var emailText: UILabel = {
-        let emailText = UILabel()
-        emailText.text = userData.email
-        emailText.font = UIFont(name: "GmarketSansBold", size: CGFloat(15))
-        return emailText
-    }()
     
     lazy var userDataView: UIImageView = {
         let userDataView = UIImageView()
@@ -175,8 +162,6 @@ class MainViewController: UIViewController {
     // MARK: configureUI
     func configureUI() {
         self.view.addSubview(self.profileImage)
-        self.view.addSubview(self.emailImageView)
-        self.view.addSubview(self.emailText)
         self.view.addSubview(self.userDataView)
         self.view.addSubview(self.userDataText)
         self.view.addSubview(self.logoImage)
@@ -199,18 +184,8 @@ class MainViewController: UIViewController {
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(0)
         }
         
-        self.emailImageView.snp.makeConstraints {
-            $0.top.equalTo(self.profileImage.snp.bottom).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-        }
-        
-        self.emailText.snp.makeConstraints {
-            $0.centerX.equalTo(self.emailImageView.snp.centerX).offset(0)
-            $0.centerY.equalTo(self.emailImageView.snp.centerY).offset(-10)
-        }
-        
         self.userDataView.snp.makeConstraints {
-            $0.top.equalTo(self.emailImageView.snp.bottom).offset(-10)
+            $0.top.equalTo(self.profileImage.snp.bottom).offset(20)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
         }
         
@@ -241,7 +216,7 @@ class MainViewController: UIViewController {
         
         self.ResultView.snp.makeConstraints {
             $0.left.right.equalTo(0)
-            $0.top.equalTo(self.dateBox.snp.bottom).offset(10)
+            $0.top.equalTo(self.dateBox.snp.bottom).offset(-10)
             $0.bottom.equalTo(self.cameraButton.snp.top).offset(-10)
         }
         
@@ -382,9 +357,15 @@ extension MainViewController: UICollectionViewDataSource {
         DateModel.downloadPhoto(uid: userData.uid, date: DateModels.date, fileName: "\(indexPath.row + 1)") { image in
             DispatchQueue.main.async {
                 cell.resultImageView.image = image
-                cell.resultLabel.text = "충치개수 : 7개\n치아상태 : 좋음"
             }
         }
+        
+        DateModel.checkDatabase(uid: userData.uid, date: DateModels.date) { results in
+            DispatchQueue.main.async {
+                cell.resultLabel.text = "충치 개수 : \(results[indexPath.row].cavity)개\n아말감 개수 : \(results[indexPath.row].amalgam)개\n금니 개수 : \(results[indexPath.row].gold)개"
+            }
+        }
+        
         return cell
     }
 }

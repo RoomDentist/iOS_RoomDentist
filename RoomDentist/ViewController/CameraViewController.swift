@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import Photos
 import Firebase
+import Alamofire
 
 class CameraViewController: UIViewController {
     // TODO: 초기 설정 1
@@ -224,8 +225,6 @@ extension CameraViewController {
         captureSession.commitConfiguration() //  구성 끝!
     }
     
-    
-    
     func startSession() {
         // TODO: session Start
         sessionQueue.async {
@@ -265,6 +264,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             dismiss(animated: true, completion: nil)
         }
         dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
         
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -282,11 +282,13 @@ extension CameraViewController {
         let metaData = StorageMetadata()
         metaData.contentType = "image/png"
         print("[카메라뷰] 저장 전 이미지 개수는? : \(self.imageCount)")
-        storage.child(filePath!).child(date).child("\(self.imageCount + 1).png").putData(data, metadata: metaData) { (metaData, error) in if let error = error {
+        storage.child(filePath!).child(date).child("\(self.imageCount + 1).png").putData(data, metadata: metaData) { [self] (metaData, error) in if let error = error {
                 print(error.localizedDescription)
                 return
             } else {
                 print("[카메라뷰] 업로드 성공")
+                self.postData(uid: "\(filePath!)", imageCount: self.imageCount + 1)
+                dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -297,5 +299,33 @@ extension CameraViewController {
             self.imageCount = $0
             print("[카메라뷰] API에서 count : \(self.imageCount)")
         })
+    }
+    
+    func postData(uid: String, imageCount: Int) {
+        let url = "https://roomdentist.tunahouse97.com/Auth"
+        var request = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 10
+        
+        // POST 로 보낼 정보
+        let params = ["uid": "\(uid)", "numbers": "\(imageCount)"] as Dictionary
+
+        // httpBody 에 parameters 추가
+        do {
+            try request.httpBody = JSONSerialization.data(withJSONObject: params, options: [])
+        } catch {
+            print("http Body Error")
+        }
+        
+        AF.request(request).responseString { (response) in
+            switch response.result {
+            case .success:
+                print("POST 성공")
+            case .failure(let error):
+                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
+            }
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
