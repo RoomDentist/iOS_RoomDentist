@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     let identifier = "ResultCollectionView"
     var DateModels = DateModel()
     var count = 0 // 서버에서 받아오는 사진 개수
+    var imageArray: [UIImage] = []
     
     @IBOutlet weak var circleImage: UIImageView!
     lazy var profileImage: UIImageView = {
@@ -28,13 +29,30 @@ class MainViewController: UIViewController {
     
     lazy var logoImage: UIButton = {
         let logoImage = UIButton()
-        logoImage.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20);
+//        logoImage.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20);
         logoImage.translatesAutoresizingMaskIntoConstraints = true
         logoImage.semanticContentAttribute = .forceRightToLeft
-//        logoImage.adjustsImageWhenHighlighted = false
         logoImage.setBackgroundImage(UIImage(named: "Logo.png"), for: .normal)
         logoImage.addTarget(self, action: #selector(logout), for: .touchUpInside)
         return logoImage
+    }()
+    
+    lazy var calendarImage: UIButton = {
+        let calendarImage = UIButton()
+        calendarImage.translatesAutoresizingMaskIntoConstraints = true
+        calendarImage.semanticContentAttribute = .forceRightToLeft
+        calendarImage.setBackgroundImage(UIImage(named: "Calendar.png"), for: .normal)
+        calendarImage.addTarget(self, action: #selector(calendarEvent), for: .touchUpInside)
+        return calendarImage
+    }()
+    
+    lazy var locationImage: UIButton = {
+        let locationImage = UIButton()
+        locationImage.translatesAutoresizingMaskIntoConstraints = true
+        locationImage.semanticContentAttribute = .forceRightToLeft
+        locationImage.setBackgroundImage(UIImage(named: "Location.png"), for: .normal)
+        locationImage.addTarget(self, action: #selector(locationEvent), for: .touchUpInside)
+        return locationImage
     }()
     
     lazy var userDataView: UIImageView = {
@@ -97,15 +115,36 @@ class MainViewController: UIViewController {
         return collectionView
       }()
     
+    lazy var noticeLabel: UILabel = {
+        let noticeLabel = UILabel()
+        noticeLabel.text = "사진 업로드 후 반응이 없다면\n날짜 버튼을 눌러 새로고침 하세요"
+        noticeLabel.numberOfLines = 2
+        noticeLabel.textAlignment = .center
+        noticeLabel.textColor = .black
+        noticeLabel.font = UIFont(name: "GmarketSansMedium", size: CGFloat(15))
+        return noticeLabel
+    }()
+    
     lazy var cameraButton: UIButton = {
         let cameraButton = UIButton()
         cameraButton.layer.cornerRadius = 10
         cameraButton.backgroundColor = UIColor(named: "SignatureBlack")
         cameraButton.setTitleColor(.white, for: .normal)
-        cameraButton.setTitle("구강 검사하기", for: .normal)
+        cameraButton.setTitle("구강 촬영하기", for: .normal)
         cameraButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         cameraButton.addTarget(self, action: #selector(cameraButtonEvent), for: .touchUpInside)
         return cameraButton
+    }()
+    
+    lazy var photoLibraryButton: UIButton = {
+        let photoLibraryButton = UIButton()
+        photoLibraryButton.layer.cornerRadius = 10
+        photoLibraryButton.backgroundColor = UIColor(named: "SignatureBlack")
+        photoLibraryButton.setTitleColor(.white, for: .normal)
+        photoLibraryButton.setTitle("앨범에서 가져오기", for: .normal)
+        photoLibraryButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        photoLibraryButton.addTarget(self, action: #selector(photoLibraryButtonEvent), for: .touchUpInside)
+        return photoLibraryButton
     }()
     
     override func viewDidLoad() {
@@ -122,11 +161,31 @@ class MainViewController: UIViewController {
         refreshCount()
     }
     
-    // MARK: 로그아웃 구현
+    // MARK: 로그아웃 및 개발자 확인 구현
     @objc func logout() {
         makeAlertDialog(title: "설정", message: "원하는 메뉴를 선택하세요")
     }
     
+    // MARK: 캘린더 버튼 클릭 구현
+    @objc func calendarEvent() {
+        // code
+    }
+    
+    // MARK: 지도 버튼 클릭 구현
+    @objc func locationEvent() {
+        let naverMapUrl = NSURL(string: "nmap://search?query=%EC%B9%98%EA%B3%BC")
+        let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8")!
+        let kakaoMapUrl = NSURL(string: "kakaomap://search?q=%EC%B9%98%EA%B3%BC")
+        if UIApplication.shared.canOpenURL(kakaoMapUrl! as URL) {
+            UIApplication.shared.open(kakaoMapUrl! as URL)
+        } else if UIApplication.shared.canOpenURL(naverMapUrl! as URL) {
+            UIApplication.shared.open(naverMapUrl! as URL)
+        } else {
+            UIApplication.shared.open(appStoreURL)
+        }
+    }
+    
+    // MARK: 날짜 버튼 클릭 시 화면 새로고침
     @objc func refresh() {
         refreshCount()
     }
@@ -139,7 +198,6 @@ class MainViewController: UIViewController {
         let result = DateModels.datetToString(sender: update)
         DateModels.date = result
         dateBoxText.text = result
-//        self.count = DateModel.checkFileMetadates(uid: userData.uid, date: DateModels.date)
         refreshCount()
     }
     
@@ -158,6 +216,16 @@ class MainViewController: UIViewController {
         let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController")
         self.navigationController?.pushViewController(pushVC!, animated: true)
     }
+    
+    @objc func photoLibraryButtonEvent() {
+        print("앨범열기")
+        // MARK: imagePicker 실행
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
 
     // MARK: configureUI
     func configureUI() {
@@ -165,12 +233,16 @@ class MainViewController: UIViewController {
         self.view.addSubview(self.userDataView)
         self.view.addSubview(self.userDataText)
         self.view.addSubview(self.logoImage)
+        self.view.addSubview(self.calendarImage)
+        self.view.addSubview(self.locationImage)
         self.view.addSubview(self.dateBox)
         self.view.addSubview(self.dateBoxText)
         self.view.addSubview(self.backButton)
         self.view.addSubview(self.forwardButton)
         self.view.addSubview(self.ResultView)
+        self.view.addSubview(self.noticeLabel)
         self.view.addSubview(self.cameraButton)
+        self.view.addSubview(self.photoLibraryButton)
         
         self.profileImage.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -180,8 +252,20 @@ class MainViewController: UIViewController {
         
         self.logoImage.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
-            $0.height.width.size.equalTo(100)
+            $0.height.width.size.equalTo(80)
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(0)
+        }
+        
+        self.calendarImage.snp.makeConstraints {
+            $0.top.equalTo(self.logoImage.snp.bottom).offset(0)
+            $0.height.width.size.equalTo(50)
+            $0.centerX.equalTo(self.logoImage.snp.centerX)
+        }
+        
+        self.locationImage.snp.makeConstraints {
+            $0.top.equalTo(self.calendarImage.snp.bottom).offset(15)
+            $0.height.width.size.equalTo(50)
+            $0.centerX.equalTo(self.logoImage.snp.centerX)
         }
         
         self.userDataView.snp.makeConstraints {
@@ -220,11 +304,22 @@ class MainViewController: UIViewController {
             $0.bottom.equalTo(self.cameraButton.snp.top).offset(-10)
         }
         
+        self.noticeLabel.snp.makeConstraints {
+            $0.centerY.equalTo(self.ResultView.snp.centerY)
+            $0.centerX.equalTo(self.ResultView.snp.centerX)
+        }
+        
         self.cameraButton.snp.makeConstraints {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.5).offset(-25)
+            $0.height.equalTo(45)
+        }
+        
+        self.photoLibraryButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.5).offset(-25) // 사이즈 계산 : 전체 화면 / 2 - 양여백 20씩 - 중간 여백 10
             $0.height.equalTo(45)
         }
     }
@@ -337,7 +432,7 @@ extension MainViewController {
     }
     
     func refreshCount() {
-        DateModel.checkFileMetadates(uid: userData.uid, date: DateModels.date, completion: {
+        DataModel.checkFileMetadates(uid: userData.uid, date: DateModels.date, completion: {
             self.count = $0
             self.ResultView.reloadData()
         })
@@ -347,22 +442,26 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("보여질 개수는? : \(self.count)")
+        if self.count > 0 {
+            self.noticeLabel.textColor = .clear
+        } else {
+            self.noticeLabel.textColor = .black
+        }
         return self.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier, for: indexPath) as? ResultCollectionView else { return UICollectionViewCell() }
-    
-//        cell.resultImageView.image = DateModels.downloadPhoto(uid: userData.uid, date: DateModels.date, fileName: "19")
-        DateModel.downloadPhoto(uid: userData.uid, date: DateModels.date, fileName: "\(indexPath.row + 1)") { image in
+
+        DataModel.downloadPhoto(uid: userData.uid, date: DateModels.date, imageCount: indexPath.row + 1) { image in
             DispatchQueue.main.async {
                 cell.resultImageView.image = image
             }
         }
         
-        DateModel.checkDatabase(uid: userData.uid, date: DateModels.date) { results in
+        DataModel.checkDatabase(uid: userData.uid, date: DateModels.date) { results in
             DispatchQueue.main.async {
-                cell.resultLabel.text = "충치 개수 : \(results[indexPath.row].cavity)개\n아말감 개수 : \(results[indexPath.row].amalgam)개\n금니 개수 : \(results[indexPath.row].gold)개"
+                cell.resultLabel.text = "충치 개수 : \(results[indexPath.row].cavity)개\n\n아말감 개수 : \(results[indexPath.row].amalgam)개\n\n금니 개수 : \(results[indexPath.row].gold)개"
             }
         }
         
@@ -371,5 +470,31 @@ extension MainViewController: UICollectionViewDataSource {
 }
 
 extension MainViewController: UICollectionViewDelegate {
-    // 선택했을 때 사용하는 것
+    // MARK: 선택했을 때 사용하는 것
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let VC = storyboard?.instantiateViewController(identifier: "ImageViewController") as? ImageViewController else { return }
+        
+        VC.image = imageArray[indexPath.row]
+        
+        self.navigationController?.pushViewController(VC, animated: true)
+    }
+    
+}
+
+// MARK: imagePicker Delegate
+extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            let cameraImage: UIImage = pickedImage
+            DataModel.saveUserImage(date: DateModels.date, img: cameraImage, imageCount: self.count)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+        
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 }

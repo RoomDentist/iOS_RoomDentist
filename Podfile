@@ -11,6 +11,7 @@ target 'RoomDentist' do
   pod 'Firebase/Storage', '~> 8.4.0'
   pod 'TextFieldEffects'
   pod 'Alamofire', '~> 5.4'
+  pod 'Charts'
   # Pods for RoomDentist
 
 end

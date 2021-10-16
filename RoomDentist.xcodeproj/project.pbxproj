@@ -24,6 +24,8 @@
 		77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537728270F210F00560AA1 /* DefaultStyle.swift */; };
 		7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753772A270F26C500560AA1 /* LoginSegue.swift */; };
 		77537732271084A300560AA1 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537731271084A300560AA1 /* UserData.swift */; };
+		776218822719C7AB00120573 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776218812719C7AB00120573 /* DataModel.swift */; };
+		77621884271AD51A00120573 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77621883271AD51A00120573 /* ImageViewController.swift */; };
 		779B6C0D271181D500016865 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C0C271181D500016865 /* DateModel.swift */; };
 		779B6C0F2711C6F200016865 /* CustomViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C0E2711C6F200016865 /* CustomViewAnimation.swift */; };
 		779B6C112711CE7E00016865 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C102711CE7E00016865 /* CameraPreview.swift */; };
@@ -57,6 +59,8 @@
 		77537728270F210F00560AA1 /* DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStyle.swift; sourceTree = "<group>"; };
 		7753772A270F26C500560AA1 /* LoginSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSegue.swift; sourceTree = "<group>"; };
 		77537731271084A300560AA1 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		776218812719C7AB00120573 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		77621883271AD51A00120573 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		779B6C0C271181D500016865 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
 		779B6C0E2711C6F200016865 /* CustomViewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewAnimation.swift; sourceTree = "<group>"; };
 		779B6C102711CE7E00016865 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 			children = (
 				7737135026AD3AAD00EE6523 /* LoginViewModel.swift */,
 				779B6C0C271181D500016865 /* DateModel.swift */,
+				776218812719C7AB00120573 /* DataModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				7737134926A9CB5800EE6523 /* JoinViewController.swift */,
 				7737134B26AAD57600EE6523 /* MainViewController.swift */,
 				779B6C122711CEAA00016865 /* CameraViewController.swift */,
+				77621883271AD51A00120573 /* ImageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -314,12 +320,14 @@
 			files = (
 				77537732271084A300560AA1 /* UserData.swift in Sources */,
 				779B6C0D271181D500016865 /* DateModel.swift in Sources */,
+				77621884271AD51A00120573 /* ImageViewController.swift in Sources */,
 				773211802700D0E300B27A46 /* ResetIDViewController.swift in Sources */,
 				779B6C132711CEAA00016865 /* CameraViewController.swift in Sources */,
 				779B6C0F2711C6F200016865 /* CustomViewAnimation.swift in Sources */,
 				7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */,
 				77390AFE26A84F17004100E3 /* LoginViewController.swift in Sources */,
 				77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */,
+				776218822719C7AB00120573 /* DataModel.swift in Sources */,
 				77390AFA26A84F17004100E3 /* AppDelegate.swift in Sources */,
 				77390AFC26A84F17004100E3 /* SceneDelegate.swift in Sources */,
 				779B6C112711CE7E00016865 /* CameraPreview.swift in Sources */,

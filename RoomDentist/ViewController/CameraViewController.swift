@@ -23,7 +23,6 @@ class CameraViewController: UIViewController {
     let captureSession = AVCaptureSession()
     var videoDeviceInput: AVCaptureDeviceInput! // 혼자 객체가아닌 나중에 디바이스 넣어줄 것이라 var로 설정. 카메라 토글 시키기 위해서
     let photoOutput = AVCapturePhotoOutput()
-    var cameraImage = UIImage()
     var DateModels = DateModel()
     var imageCount = 0
     
@@ -172,7 +171,7 @@ class CameraViewController: UIViewController {
         // MARK: imagePicker 실행
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self //3
+        imagePicker.delegate = self
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true)
     }
@@ -258,8 +257,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
 extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            cameraImage = pickedImage
-            self.saveUserImage(img: self.cameraImage)
+            let cameraImage: UIImage = pickedImage
+            DataModel.saveUserImage(date: DateModels.date, img: cameraImage, imageCount: self.imageCount)
         } else {
             dismiss(animated: true, completion: nil)
         }
@@ -269,63 +268,16 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
-// MARK: 파일 업로드
 extension CameraViewController {
-    func saveUserImage(img: UIImage) {
-        var date = DateModels.date
-        var data = Data()
-        data = img.jpegData(compressionQuality: 1)!
-        let filePath = Auth.auth().currentUser?.uid
-        let metaData = StorageMetadata()
-        metaData.contentType = "image/png"
-        print("[카메라뷰] 저장 전 이미지 개수는? : \(self.imageCount)")
-        storage.child(filePath!).child(date).child("\(self.imageCount + 1).png").putData(data, metadata: metaData) { [self] (metaData, error) in if let error = error {
-                print(error.localizedDescription)
-                return
-            } else {
-                print("[카메라뷰] 업로드 성공")
-                self.postData(uid: "\(filePath!)", imageCount: self.imageCount + 1)
-                dismiss(animated: true, completion: nil)
-            }
-        }
-    }
-    
     func refreshCount() {
         let filePath = Auth.auth().currentUser?.uid
-        DateModel.checkFileMetadates(uid: filePath!, date: DateModels.date, completion: {
+        DataModel.checkFileMetadates(uid: filePath!, date: DateModels.date, completion: {
             self.imageCount = $0
             print("[카메라뷰] API에서 count : \(self.imageCount)")
         })
-    }
-    
-    func postData(uid: String, imageCount: Int) {
-        let url = "https://roomdentist.tunahouse97.com/Auth"
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = 10
-        
-        // POST 로 보낼 정보
-        let params = ["uid": "\(uid)", "numbers": "\(imageCount)"] as Dictionary
-
-        // httpBody 에 parameters 추가
-        do {
-            try request.httpBody = JSONSerialization.data(withJSONObject: params, options: [])
-        } catch {
-            print("http Body Error")
-        }
-        
-        AF.request(request).responseString { (response) in
-            switch response.result {
-            case .success:
-                print("POST 성공")
-            case .failure(let error):
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-            }
-        }
-        dismiss(animated: true, completion: nil)
     }
 }
