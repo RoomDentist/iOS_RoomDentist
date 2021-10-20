@@ -52,7 +52,7 @@ class ImageViewController: UIViewController {
         }
         
         self.exitButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(0)
+            $0.bottom.equalTo(self.view).inset(20)
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
             $0.height.equalTo(45)
@@ -62,6 +62,7 @@ class ImageViewController: UIViewController {
 
 extension ImageViewController {
     @objc func prevPageEvent() {
+        resultImage.image = nil // 화면에 이미지가 남으면서 Pop되기 때문에 보기 좋지 않음.
         self.navigationController?.popViewController(animated: true)
     }
     

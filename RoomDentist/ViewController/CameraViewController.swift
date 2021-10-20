@@ -256,7 +256,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
 // MARK: imagePicker Delegate
 extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             let cameraImage: UIImage = pickedImage
             DataModel.saveUserImage(date: DateModels.date, img: cameraImage, imageCount: self.imageCount)
         } else {

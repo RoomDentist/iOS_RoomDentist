@@ -310,14 +310,14 @@ class MainViewController: UIViewController {
         }
         
         self.cameraButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
+            $0.bottom.equalTo(self.view).inset(20)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
             $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.5).offset(-25)
             $0.height.equalTo(45)
         }
         
         self.photoLibraryButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(0)
+            $0.bottom.equalTo(self.view).inset(20)
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
             $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.5).offset(-25) // 사이즈 계산 : 전체 화면 / 2 - 양여백 20씩 - 중간 여백 10
             $0.height.equalTo(45)
@@ -395,7 +395,7 @@ extension MainViewController {
         let alertSuccessBtn = UIAlertAction(title: "개발자 확인", style: .default) { (action) in
             print("[SUCCESS] Dialog Success Button Click!")
             let blogUrl = NSURL(string: "https://github.com/RoomDentist")
-            let blogSafariView: SFSafariViewController = SFSafariViewController(url: blogUrl as! URL)
+            let blogSafariView: SFSafariViewController = SFSafariViewController(url: blogUrl! as URL)
             self.present(blogSafariView, animated: true, completion: nil)
         }
         
@@ -478,7 +478,6 @@ extension MainViewController: UICollectionViewDelegate {
         
         DataModel.downloadPhoto(uid: userData.uid, date: DateModels.date, imageCount: indexPath.row + 1) { image in
             DispatchQueue.main.async {
-//                cell.resultImageView.image = image
                 VC.image = image
                 self.navigationController?.pushViewController(VC, animated: true)
             }
@@ -490,7 +489,7 @@ extension MainViewController: UICollectionViewDelegate {
 // MARK: imagePicker Delegate
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             DataModel.saveUserImage(date: DateModels.date, img: pickedImage, imageCount: self.count)
         } else {
             dismiss(animated: true, completion: nil)
