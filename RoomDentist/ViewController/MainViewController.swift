@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import SafariServices
+import MessageUI
 
 class MainViewController: UIViewController {
     let db = Database.database().reference()
@@ -63,7 +64,7 @@ class MainViewController: UIViewController {
     
     lazy var userDataText: UILabel = {
         let userDataText = UILabel()
-        userDataText.text = "\(userData.name)(\(userData.gender)) / \(userData.age)세"
+        userDataText.text = "\(userData.name)(\(userData.gender)) / 만 \(userData.age)세"
         userDataText.font = UIFont(name: "GmarketSansBold", size: CGFloat(15))
         return userDataText
     }()
@@ -349,12 +350,19 @@ extension MainViewController {
             dateFormatter.locale = Locale(identifier: "ko_kr")
             let date: Date = dateFormatter.date(from: self.userData.birth)!
             let birthYear = calendar.dateComponents([.year], from: date)
+            let birthMonth = calendar.dateComponents([.month], from: date)
         
             let nowDate = Date()
             let nowYear = calendar.dateComponents([.year], from: nowDate)
-            self.userData.age = Int(nowYear.year! - birthYear.year!)
+            let nowMonth = calendar.dateComponents([.month], from: nowDate)
             
-            self.userDataText.text = "\(self.userData.name)(\(self.userData.gender)) / \(self.userData.age)세"
+            if nowMonth.month! - birthMonth.month! > 0 {
+                self.userData.age = Int(nowYear.year! - birthYear.year!)
+            } else {
+                self.userData.age = Int(nowYear.year! - birthYear.year!) - 1
+            }
+            
+            self.userDataText.text = "\(self.userData.name)(\(self.userData.gender)) / 만 \(self.userData.age)세"
           }) { error in
             print(error.localizedDescription)
           }
@@ -377,7 +385,7 @@ extension MainViewController {
 }
 
 // MARK: Alert Dialog 생성
-extension MainViewController {
+extension MainViewController: MFMailComposeViewControllerDelegate {
     func makeAlertDialog(title: String, message: String, _ isAlert : Bool = true) {
         // alert : 가운데에서 출력되는 Dialog. 취소/동의 같이 2개 이하를 선택할 경우 사용. 간단명료 해야함.
         let alert = isAlert ? UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -388,37 +396,61 @@ extension MainViewController {
         // cancel : 글자 진하게
         // defaule : X
         let alertLogoutBtn = UIAlertAction(title: "로그아웃", style: .destructive) { (action) in
-            print("[SUCCESS] Dialog Success Button Click!")
             self.authlogout()
         }
         
         let alertSuccessBtn = UIAlertAction(title: "개발자 확인", style: .default) { (action) in
-            print("[SUCCESS] Dialog Success Button Click!")
             let blogUrl = NSURL(string: "https://github.com/RoomDentist")
             let blogSafariView: SFSafariViewController = SFSafariViewController(url: blogUrl! as URL)
             self.present(blogSafariView, animated: true, completion: nil)
         }
         
+        let alertEmailBtn = UIAlertAction(title: "문의 하기", style: .default) { (action) in
+            if MFMailComposeViewController.canSendMail() {
+                let compseVC = MFMailComposeViewController()
+                compseVC.mailComposeDelegate = self
+                compseVC.setToRecipients(["roomdentist_work@tunahouse97.com"])
+                compseVC.setSubject("RoomDentist 문의하기")
+                compseVC.setMessageBody("\(self.userData.email)\n", isHTML: false)
+                self.present(compseVC, animated: true, completion: nil)
+            }
+            else {
+                let sendMailErrorAlert = UIAlertController(title: "메일을 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .default) {
+                    (action) in
+                    print("확인")
+                }
+                sendMailErrorAlert.addAction(confirmAction)
+                self.present(sendMailErrorAlert, animated: true, completion: nil)
+            }
+        }
+        
         let alertDeleteBtn = UIAlertAction(title: "취소", style: .cancel) { (action) in
-            print("[SUCCESS] Dialog Cancel Button Click!")
-            self.dismiss(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
         
         // Dialog에 버튼 추가
         if(isAlert) {
             alert.addAction(alertLogoutBtn)
             alert.addAction(alertSuccessBtn)
+            alert.addAction(alertEmailBtn)
             alert.addAction(alertDeleteBtn)
         }
         else {
             alert.addAction(alertLogoutBtn)
             alert.addAction(alertSuccessBtn)
+            alert.addAction(alertEmailBtn)
             alert.addAction(alertDeleteBtn)
         }
         
         // 화면에 출력
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: 이메일 전송 에러 처리
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            controller.dismiss(animated: true, completion: nil)
+        }
 }
 
 extension MainViewController {
