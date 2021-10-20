@@ -20,7 +20,7 @@ class ResultCollectionView: UICollectionViewCell {
     
     lazy var resultLabel: UILabel = {
         let resultLabel = UILabel()
-        resultLabel.text = "충치 개수 : 7개\n\n아말감 개수 : 7개\n\n금니 개수 : 7개"
+        resultLabel.text = "충치 개수 : 0개\n\n아말감 개수 : 0개\n\n금니 개수 : 0개"
         resultLabel.numberOfLines = 0
         resultLabel.textColor = .black
         resultLabel.font = UIFont(name: "GmarketSansMedium", size: CGFloat(15))

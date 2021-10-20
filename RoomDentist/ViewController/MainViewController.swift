@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     let identifier = "ResultCollectionView"
     var DateModels = DateModel()
     var count = 0 // 서버에서 받아오는 사진 개수
-    var imageArray: [UIImage] = []
+    var imageArray: [UIImage] = [UIImage(named: "RoomDentist.png")!]
     
     @IBOutlet weak var circleImage: UIImageView!
     lazy var profileImage: UIImageView = {
@@ -439,6 +439,7 @@ extension MainViewController {
     }
 }
 
+// MARK: UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("보여질 개수는? : \(self.count)")
@@ -469,15 +470,19 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: 선택했을 때 사용하는 것
 extension MainViewController: UICollectionViewDelegate {
-    // MARK: 선택했을 때 사용하는 것
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let VC = storyboard?.instantiateViewController(identifier: "ImageViewController") as? ImageViewController else { return }
         
-        VC.image = imageArray[indexPath.row]
-        
-        self.navigationController?.pushViewController(VC, animated: true)
+        DataModel.downloadPhoto(uid: userData.uid, date: DateModels.date, imageCount: indexPath.row + 1) { image in
+            DispatchQueue.main.async {
+//                cell.resultImageView.image = image
+                VC.image = image
+                self.navigationController?.pushViewController(VC, animated: true)
+            }
+        }
     }
     
 }
@@ -486,8 +491,7 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let cameraImage: UIImage = pickedImage
-            DataModel.saveUserImage(date: DateModels.date, img: cameraImage, imageCount: self.count)
+            DataModel.saveUserImage(date: DateModels.date, img: pickedImage, imageCount: self.count)
         } else {
             dismiss(animated: true, completion: nil)
         }
