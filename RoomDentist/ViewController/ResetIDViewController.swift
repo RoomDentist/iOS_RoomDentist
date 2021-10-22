@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TextFieldEffects
 import Firebase
 
 class ResetIDViewController: UIViewController {
@@ -14,24 +13,27 @@ class ResetIDViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "방구석 Dentist 비밀번호 찾기"
-        titleLabel.tintColor = UIColor(named: "Brown")!
+        titleLabel.textColor = UIColor(named: "Brown")!
         titleLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return titleLabel
     }()
     
-    lazy var EmailTextField: TextFieldEffects = {
-        let EmailTextField = MadokaTextField()
-        EmailTextField.placeholderColor = UIColor(named: "Brown")!
+    lazy var EmailTextBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var EmailTextField: UITextField = {
+        let EmailTextField = UITextField()
+        EmailTextField.placeholder = "Email"
+        EmailTextField.setPlaceholderColor(UIColor(named: "Brown")!)
         EmailTextField.keyboardType = .emailAddress
-        EmailTextField.placeholder = "이메일"
-        EmailTextField.keyboardType = .emailAddress
-        EmailTextField.borderColor = .systemOrange
-        EmailTextField.textColor = .black
-        EmailTextField.placeholderFontScale = CGFloat(1)
+        EmailTextField.textColor = UIColor(named: "Brown")!
+        EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         EmailTextField.autocapitalizationType = .none
         EmailTextField.autocorrectionType = .no
         EmailTextField.delegate = self
-        EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
         return EmailTextField
     }()
     
@@ -69,6 +71,7 @@ class ResetIDViewController: UIViewController {
     
     func configureUI() {
         self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.EmailTextBox)
         self.view.addSubview(self.EmailTextField)
         self.view.addSubview(self.findButton)
         
@@ -77,19 +80,26 @@ class ResetIDViewController: UIViewController {
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
         }
         
-        self.EmailTextField.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+        self.EmailTextBox.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(60)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.height.equalTo(58)
+        }
+        
+        self.EmailTextField.snp.makeConstraints {
+            $0.centerX.equalTo(self.EmailTextBox.snp.centerX)
+            $0.centerY.equalTo(self.EmailTextBox.snp.centerY)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
         }
         
         self.findButton.snp.makeConstraints {
-            $0.top.equalTo(self.EmailTextField.snp.bottom).offset(30)
+            $0.top.equalTo(self.EmailTextBox.snp.bottom).offset(10)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(22)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(22)
             $0.height.equalTo(45)
         }
     }

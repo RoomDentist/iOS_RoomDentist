@@ -15,6 +15,7 @@ target 'RoomDentist' do
   pod 'Charts'
   pod 'RxSwift', '6.2.0'
   pod 'RxCocoa', '6.2.0'
+  pod 'GoogleSignIn'
   # Pods for RoomDentist
 
 end

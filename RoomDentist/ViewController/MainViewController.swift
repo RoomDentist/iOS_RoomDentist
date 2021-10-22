@@ -30,7 +30,6 @@ class MainViewController: UIViewController {
     
     lazy var logoImage: UIButton = {
         let logoImage = UIButton()
-//        logoImage.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20);
         logoImage.translatesAutoresizingMaskIntoConstraints = true
         logoImage.semanticContentAttribute = .forceRightToLeft
         logoImage.setBackgroundImage(UIImage(named: "Logo.png"), for: .normal)
@@ -502,7 +501,7 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: 선택했을 때 사용하는 것
+// MARK: UICollectionView 선택했을 때 사용하는 것
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

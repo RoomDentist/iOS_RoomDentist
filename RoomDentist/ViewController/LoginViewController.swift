@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 import Kingfisher
-import TextFieldEffects
 import Firebase
 
 class LoginViewController: UIViewController {
@@ -23,29 +22,37 @@ class LoginViewController: UIViewController {
         return mainLogoImage
     }()
     
-    lazy var EmailTextField: TextFieldEffects = {
-        let EmailTextField = MadokaTextField()
-        EmailTextField.placeholderColor = UIColor(named: "Brown")!
-        EmailTextField.placeholder = "이메일"
+    lazy var EmailTextBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var EmailTextField: UITextField = {
+        let EmailTextField = UITextField()
+        EmailTextField.placeholder = "Email"
+        EmailTextField.setPlaceholderColor(UIColor(named: "Brown")!)
         EmailTextField.keyboardType = .emailAddress
-        EmailTextField.borderColor = .systemOrange
-        EmailTextField.textColor = .black
+        EmailTextField.textColor = UIColor(named: "Brown")!
         EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        EmailTextField.placeholderFontScale = CGFloat(1)
         EmailTextField.autocapitalizationType = .none
         EmailTextField.autocorrectionType = .no
         EmailTextField.delegate = self
         return EmailTextField
     }()
     
-    lazy var PwTextField: TextFieldEffects = {
-        let PwTextField = MadokaTextField()
-        PwTextField.placeholderColor = UIColor(named: "Brown")!
-        PwTextField.placeholder = "비밀번호"
-        PwTextField.borderColor = .systemOrange
+    lazy var PwTextBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var PwTextField: UITextField = {
+        let PwTextField = UITextField()
+        PwTextField.placeholder = "Password"
+        PwTextField.setPlaceholderColor(UIColor(named: "Brown")!)
         PwTextField.textColor = .black
         PwTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        PwTextField.placeholderFontScale = CGFloat(1)
         PwTextField.autocapitalizationType = .none
         PwTextField.autocorrectionType = .no
         PwTextField.isSecureTextEntry = true
@@ -55,7 +62,7 @@ class LoginViewController: UIViewController {
     
     lazy var FindPwButton: UIButton = {
         let FindPwButton = UIButton()
-        FindPwButton.backgroundColor = UIColor(named: "SkyBlue")
+        FindPwButton.backgroundColor = .clear
         FindPwButton.setTitleColor(UIColor(named: "Brown"), for: .normal)
         FindPwButton.setTitle("비밀번호 찾기", for: .normal)
         FindPwButton.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(13))
@@ -77,10 +84,23 @@ class LoginViewController: UIViewController {
     lazy var joinButton: UIButton = {
         let joinButton = UIButton()
         joinButton.layer.cornerRadius = 10
-        joinButton.backgroundColor = .systemOrange
-        joinButton.setTitle("회원가입", for: .normal)
-        joinButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        joinButton.backgroundColor = .clear
+        joinButton.setTitle("계정이 없으신가요? 여기를 눌러 회원가입", for: .normal)
+        joinButton.setTitleColor(UIColor(named: "Brown"), for: .normal)
+        joinButton.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(15))
         return joinButton
+    }()
+    
+    lazy var appleLoginButton: UIButton = {
+        let appleLoginButton = UIButton()
+        appleLoginButton.setImage(UIImage(named: "Apple.png"), for: .normal)
+        return appleLoginButton
+    }()
+    
+    lazy var googleLoginButton: UIButton = {
+        let googleLoginButton = UIButton()
+        googleLoginButton.setImage(UIImage(named: "Google.png"), for: .normal)
+        return googleLoginButton
     }()
     
     override func viewDidLoad() {
@@ -95,43 +115,8 @@ class LoginViewController: UIViewController {
         joinButton.addTarget(self, action: #selector(moveJoinView), for: .touchUpInside)
         FindPwButton.addTarget(self, action: #selector(moveResetIDView), for: .touchUpInside)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
 
-        tokens.forEach { NotificationCenter.default.removeObserver($0) }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) { // 화면이 표시되기 직전에 사용
-        super.viewWillAppear(animated)
-
-        // 화면에 표시되기 직전에 옵저버가 추가, 미리 뷰 로드전에 하면 오류가 생김
-        var token = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: OperationQueue.main) { [weak self] (noti) in
-            if let frameValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                let keyboardFrame = frameValue.cgRectValue
-
-                self?.view.frame.origin.y = -keyboardFrame.size.height
-
-                UIView.animate(withDuration: 0.3, animations: {
-                    self?.view.layoutIfNeeded()
-                }, completion: { finished in
-                    UIView.setAnimationsEnabled(true)
-                })
-            }
-        } // 정말 잘 쓰이는 코드, 필히 알고있을 것.
-        tokens.append(token)
-
-        token = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: OperationQueue.main, using: { [weak self] (noti) in
-            self?.view.frame.origin.y = 0
-
-            UIView.animate(withDuration: 0.3) {
-                self?.view.layoutIfNeeded()
-            }
-        })
-        tokens.append(token)
-    }
-    
-//    MARK: Action
+    // MARK: Action
     @objc func moveJoinView() {
         performSegue(withIdentifier: "JoinSegue", sender: nil)
     }
@@ -150,53 +135,85 @@ class LoginViewController: UIViewController {
         
     func configureUI() {
         self.view.addSubview(self.mainLogoImage)
+        self.view.addSubview(self.EmailTextBox)
         self.view.addSubview(self.EmailTextField)
+        self.view.addSubview(self.PwTextBox)
         self.view.addSubview(self.PwTextField)
         self.view.addSubview(self.FindPwButton)
         self.view.addSubview(self.loginButton)
         self.view.addSubview(self.joinButton)
+        self.view.addSubview(self.appleLoginButton)
+        self.view.addSubview(self.googleLoginButton)
         
         self.mainLogoImage.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.size.height.equalTo(self.view.safeAreaLayoutGuide.snp.height).multipliedBy(0.30)
+            $0.size.height.equalTo(self.view.safeAreaLayoutGuide.snp.height).multipliedBy(0.25)
+        }
+        
+        self.EmailTextBox.snp.makeConstraints {
+            $0.top.equalTo(self.mainLogoImage.snp.bottom).offset(20)
+            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.height.equalTo(58)
         }
         
         self.EmailTextField.snp.makeConstraints {
-            $0.top.equalTo(self.mainLogoImage.snp.bottom).offset(100)
+            $0.centerY.equalTo(self.EmailTextBox.snp.centerY)
+            $0.centerX.equalTo(self.EmailTextBox.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+        }
+        
+        self.PwTextBox.snp.makeConstraints {
+            $0.top.equalTo(self.EmailTextBox.snp.bottom).offset(10)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(60)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.height.equalTo(58)
         }
         
         self.PwTextField.snp.makeConstraints {
-            $0.top.equalTo(self.EmailTextField.snp.bottom).offset(10)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(60)
+            $0.centerY.equalTo(self.PwTextBox.snp.centerY)
+            $0.centerX.equalTo(self.PwTextBox.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
         }
         
         self.FindPwButton.snp.makeConstraints {
-            $0.top.equalTo(self.PwTextField.snp.bottom).offset(0)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.top.equalTo(self.PwTextBox.snp.bottom).offset(0)
+            $0.right.equalTo(self.PwTextBox.snp.right).inset(0)
         }
         
         self.loginButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.joinButton.snp.top).offset(-10)
+            $0.top.equalTo(self.PwTextBox.snp.bottom).offset(45)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(45)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(22)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(22)
+            $0.height.equalTo(54)
         }
         
         self.joinButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(0)
+            $0.top.equalTo(self.loginButton.snp.bottom).offset(15)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(45)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(22)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(22)
+            $0.height.equalTo(54)
+        }
+        
+        self.appleLoginButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.googleLoginButton.snp.top).offset(-5)
+            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+        }
+        
+        self.googleLoginButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.view).inset(20)
+            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
         }
     }
 }
@@ -303,16 +320,15 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct ProfileVCPreview: PreviewProvider {
-    static var previews: some View {
-        Group {
-            UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "LoginViewController").toPreview().previewDevice("iPhone 12 Pro")
-        }
+// MARK: TextFields Placeholder 색상 변경
+public extension UITextField {
+    func setPlaceholderColor(_ placeholderColor: UIColor) {
+        attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [
+                .foregroundColor: placeholderColor,
+                .font: font
+            ].compactMapValues { $0 }
+        )
     }
 }
-#endif

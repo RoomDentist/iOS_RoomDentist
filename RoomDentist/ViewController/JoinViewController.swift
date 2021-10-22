@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TextFieldEffects
 import Firebase
 
 class JoinViewController: UIViewController {
@@ -28,30 +27,38 @@ class JoinViewController: UIViewController {
         return titleLabel
     }()
     
-    lazy var NameTextField: TextFieldEffects = {
-        let NameTextField = MadokaTextField()
-        NameTextField.placeholderColor = UIColor(named: "Brown")!
+    // MARK: 회원 가입 필수 정보 구현
+    lazy var NameTextBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var NameTextField: UITextField = {
+        let NameTextField = UITextField()
         NameTextField.placeholder = "이름"
-        NameTextField.borderColor = .systemOrange
-        NameTextField.textColor = .black
+        NameTextField.setPlaceholderColor(UIColor(named: "Brown")!)
+        NameTextField.textColor = UIColor(named: "Brown")!
         NameTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        NameTextField.placeholderFontScale = CGFloat(1)
         NameTextField.autocapitalizationType = .none
         NameTextField.autocorrectionType = .no
         NameTextField.delegate = self
         return NameTextField
     }()
     
-    lazy var EmailTextField: TextFieldEffects = {
-        let EmailTextField = MadokaTextField()
-        EmailTextField.placeholderColor = UIColor(named: "Brown")!
+    lazy var EmailTextBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var EmailTextField: UITextField = {
+        let EmailTextField = UITextField()
+        EmailTextField.placeholder = "Email"
+        EmailTextField.setPlaceholderColor(UIColor(named: "Brown")!)
         EmailTextField.keyboardType = .emailAddress
-        EmailTextField.placeholder = "이메일"
-        EmailTextField.keyboardType = .emailAddress
-        EmailTextField.borderColor = .systemOrange
-        EmailTextField.textColor = .black
+        EmailTextField.textColor = UIColor(named: "Brown")!
         EmailTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        EmailTextField.placeholderFontScale = CGFloat(1)
         EmailTextField.autocapitalizationType = .none
         EmailTextField.autocorrectionType = .no
         EmailTextField.delegate = self
@@ -67,14 +74,18 @@ class JoinViewController: UIViewController {
         return SendEmailButton
     }()
     
-    lazy var PwTextField: TextFieldEffects = {
-        let PwTextField = MadokaTextField()
-        PwTextField.placeholderColor = UIColor(named: "Brown")!
+    lazy var PwTextBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var PwTextField: UITextField = {
+        let PwTextField = UITextField()
         PwTextField.placeholder = "비밀번호"
-        PwTextField.borderColor = .systemOrange
-        PwTextField.textColor = .black
+        PwTextField.setPlaceholderColor(UIColor(named: "Brown")!)
+        PwTextField.textColor = UIColor(named: "Brown")!
         PwTextField.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        PwTextField.placeholderFontScale = CGFloat(1)
         PwTextField.autocapitalizationType = .none
         PwTextField.autocorrectionType = .no
         PwTextField.isSecureTextEntry = true
@@ -82,14 +93,18 @@ class JoinViewController: UIViewController {
         return PwTextField
     }()
     
-    lazy var PwTextFieldRepeat: TextFieldEffects = {
-        let PwTextFieldRepeat = MadokaTextField()
-        PwTextFieldRepeat.placeholderColor = UIColor(named: "Brown")!
+    lazy var PwTextRepeatBox: UIImageView = {
+        let EmailTextBox = UIImageView()
+        EmailTextBox.image = UIImage(named: "Box.png")
+        return EmailTextBox
+    }()
+    
+    lazy var PwTextFieldRepeat: UITextField = {
+        let PwTextFieldRepeat = UITextField()
         PwTextFieldRepeat.placeholder = "비밀번호 재입력"
-        PwTextFieldRepeat.borderColor = .systemOrange
-        PwTextFieldRepeat.textColor = .black
+        PwTextFieldRepeat.setPlaceholderColor(UIColor(named: "Brown")!)
+        PwTextFieldRepeat.textColor = UIColor(named: "Brown")!
         PwTextFieldRepeat.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        PwTextFieldRepeat.placeholderFontScale = CGFloat(1)
         PwTextFieldRepeat.autocapitalizationType = .none
         PwTextFieldRepeat.autocorrectionType = .no
         PwTextFieldRepeat.isSecureTextEntry = true
@@ -152,6 +167,53 @@ class JoinViewController: UIViewController {
         return PwLabel
     }()
     
+    // MARK: 약관 구현
+    lazy var termsofUseButton: UIButton = {
+        let termsofUseButton = UIButton()
+        termsofUseButton.setBackgroundImage(UIImage(named: "box"), for: .normal)
+        termsofUseButton.setBackgroundImage(UIImage(named: "checkBox"), for: .selected)
+        return termsofUseButton
+    }()
+    
+    lazy var termsofUseLabel: UILabel = {
+        let termsofUseLabel = UILabel()
+        termsofUseLabel.text = "서비스 이용약관 동의 (필수)"
+        termsofUseLabel.textColor = UIColor(named: "Brown")!
+        termsofUseLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        return termsofUseLabel
+    }()
+    
+    lazy var privacyPolicyButton: UIButton = {
+        let privacyPolicyButton = UIButton()
+        privacyPolicyButton.setBackgroundImage(UIImage(named: "box"), for: .normal)
+        privacyPolicyButton.setBackgroundImage(UIImage(named: "checkBox"), for: .selected)
+        return privacyPolicyButton
+    }()
+    
+    lazy var privacyPolicyLabel: UILabel = {
+        let privacyPolicyLabel = UILabel()
+        privacyPolicyLabel.text = "개인정보 수집 및 이용 동의 (필수)"
+        privacyPolicyLabel.textColor = UIColor(named: "Brown")!
+        privacyPolicyLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        return privacyPolicyLabel
+    }()
+    
+    lazy var overAgeButton: UIButton = {
+        let privacyPolicyButton = UIButton()
+        privacyPolicyButton.setBackgroundImage(UIImage(named: "box"), for: .normal)
+        privacyPolicyButton.setBackgroundImage(UIImage(named: "checkBox"), for: .selected)
+        return privacyPolicyButton
+    }()
+    
+    lazy var overAgeLabel: UILabel = {
+        let privacyPolicyLabel = UILabel()
+        privacyPolicyLabel.text = "만 14세 이상입니다 (필수)"
+        privacyPolicyLabel.textColor = UIColor(named: "Brown")!
+        privacyPolicyLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        return privacyPolicyLabel
+    }()
+    
+    // MARK: 프로필 사진 업로드 및 회원 가입 버튼 구현
     lazy var profileButton: UIButton = {
         let profileButton = UIButton()
         profileButton.layer.cornerRadius = 10
@@ -197,10 +259,14 @@ class JoinViewController: UIViewController {
 
     func configureUI() {
         self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.NameTextBox)
         self.view.addSubview(self.NameTextField)
+        self.view.addSubview(self.EmailTextBox)
         self.view.addSubview(self.EmailTextField)
         self.view.addSubview(self.SendEmailButton)
+        self.view.addSubview(self.PwTextBox)
         self.view.addSubview(self.PwTextField)
+        self.view.addSubview(self.PwTextRepeatBox)
         self.view.addSubview(self.PwTextFieldRepeat)
         self.view.addSubview(self.PwLabel)
         self.view.addSubview(self.BirthText)
@@ -215,67 +281,92 @@ class JoinViewController: UIViewController {
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
         }
         
-        self.NameTextField.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(50)
+        self.NameTextBox.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+        }
+        
+        self.NameTextField.snp.makeConstraints {
+            $0.centerX.equalTo(self.NameTextBox.snp.centerX)
+            $0.centerY.equalTo(self.NameTextBox.snp.centerY)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+        }
+        
+        self.EmailTextBox.snp.makeConstraints {
+            $0.top.equalTo(NameTextBox.snp.bottom).offset(10)
+            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
             $0.height.equalTo(60)
         }
         
         self.EmailTextField.snp.makeConstraints {
-            $0.top.equalTo(NameTextField.snp.bottom).offset(10)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(60)
+            $0.centerX.equalTo(self.EmailTextBox.snp.centerX)
+            $0.centerY.equalTo(self.EmailTextBox.snp.centerY)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
         }
         
         self.SendEmailButton.snp.makeConstraints {
-            $0.top.equalTo(self.EmailTextField.snp.bottom).offset(0)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.top.equalTo(self.EmailTextBox.snp.bottom).offset(10)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+        }
+        
+        self.PwTextBox.snp.makeConstraints {
+            $0.top.equalTo(self.SendEmailButton.snp.bottom).offset(20)
+            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
         }
 
         self.PwTextField.snp.makeConstraints {
-            $0.top.equalTo(self.SendEmailButton.snp.bottom).offset(20)
+            $0.centerX.equalTo(self.PwTextBox.snp.centerX)
+            $0.centerY.equalTo(self.PwTextBox.snp.centerY)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+        }
+        
+        self.PwTextRepeatBox.snp.makeConstraints {
+            $0.top.equalTo(PwTextBox.snp.bottom).offset(10)
             $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(60)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
         }
         
         self.PwTextFieldRepeat.snp.makeConstraints {
-            $0.top.equalTo(self.PwTextField.snp.bottom).offset(10)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            $0.height.equalTo(60)
+            $0.centerX.equalTo(self.PwTextRepeatBox.snp.centerX)
+            $0.centerY.equalTo(self.PwTextRepeatBox.snp.centerY)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
         }
         
         self.PwLabel.snp.makeConstraints {
-            $0.top.equalTo(self.PwTextFieldRepeat.snp.bottom).offset(0)
+            $0.top.equalTo(self.PwTextRepeatBox.snp.bottom).offset(10)
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
         }
         
         self.BirthText.snp.makeConstraints {
-            $0.top.equalTo(self.PwLabel.snp.bottom).offset(17)
+            $0.top.equalTo(self.PwLabel.snp.bottom).offset(20)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             $0.right.equalTo(self.BirthTextFieldPicker.snp.left).offset(-20)
         }
         
         self.BirthTextFieldPicker.snp.makeConstraints {
-            $0.top.equalTo(self.PwLabel.snp.bottom).offset(10)
+            $0.top.equalTo(self.PwLabel.snp.bottom).offset(13)
             $0.left.equalTo(self.BirthText.snp.right).offset(20)
         }
         
         self.genderText.snp.makeConstraints {
-            $0.top.equalTo(self.PwLabel.snp.bottom).offset(17)
+            $0.top.equalTo(self.PwLabel.snp.bottom).offset(20)
             $0.left.equalTo(self.BirthTextFieldPicker.snp.right).offset(20)
             $0.right.equalTo(self.genderSegment.snp.left).offset(-20)
         }
         
         self.genderSegment.snp.makeConstraints {
-            $0.top.equalTo(self.PwLabel.snp.bottom).offset(10)
+            $0.top.equalTo(self.PwLabel.snp.bottom).offset(13)
             $0.left.equalTo(self.genderText.snp.right).offset(20)
         }
         
@@ -482,16 +573,3 @@ extension JoinViewController {
         }
     }
 }
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct ProfileVCPreview1: PreviewProvider {
-    static var previews: some View {
-        Group {
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "JoinViewController").toPreview().previewDevice("iPhone 12 Pro")
-        }
-    }
-}
-#endif
