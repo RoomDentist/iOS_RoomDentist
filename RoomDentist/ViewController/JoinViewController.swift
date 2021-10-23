@@ -7,12 +7,25 @@
 
 import UIKit
 import Firebase
+import SafariServices
+import SwiftUI
 
 class JoinViewController: UIViewController {
     
     let db = Database.database().reference()
     let storage = Storage.storage().reference().child("users")
     var checkJoinParam: Bool = false
+    var checkButtonParam: Bool = false
+    
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    lazy var innerView: UIView = {
+        let innerView = UIView()
+        return innerView
+    }()
     
     lazy var profileImage: UIImage = {
         let profileImage = UIImage()
@@ -71,6 +84,7 @@ class JoinViewController: UIViewController {
         SendEmailButton.setTitleColor(UIColor(named: "Brown"), for: .normal)
         SendEmailButton.setTitle("이메일 인증", for: .normal)
         SendEmailButton.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(13))
+        SendEmailButton.addTarget(self, action: #selector(sendEmailCheck), for: .touchUpInside)
         return SendEmailButton
     }()
     
@@ -170,47 +184,55 @@ class JoinViewController: UIViewController {
     // MARK: 약관 구현
     lazy var termsofUseButton: UIButton = {
         let termsofUseButton = UIButton()
-        termsofUseButton.setBackgroundImage(UIImage(named: "box"), for: .normal)
-        termsofUseButton.setBackgroundImage(UIImage(named: "checkBox"), for: .selected)
+        termsofUseButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        termsofUseButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        termsofUseButton.tintColor = UIColor(named: "RoomYellow")
+        termsofUseButton.addTarget(self, action: #selector(BtnEvent), for: .touchUpInside)
         return termsofUseButton
     }()
     
-    lazy var termsofUseLabel: UILabel = {
-        let termsofUseLabel = UILabel()
-        termsofUseLabel.text = "서비스 이용약관 동의 (필수)"
-        termsofUseLabel.textColor = UIColor(named: "Brown")!
-        termsofUseLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+    lazy var termsofUseLabel: UIButton = {
+        let termsofUseLabel = UIButton()
+        termsofUseLabel.setTitle("서비스 이용약관 동의 (필수)", for: .normal)
+        termsofUseLabel.setTitleColor(UIColor(named: "Brown"), for: .normal)
+        termsofUseLabel.addTarget(self, action: #selector(termsofUseUrl), for: .touchUpInside)
+        termsofUseLabel.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(17))
         return termsofUseLabel
     }()
     
     lazy var privacyPolicyButton: UIButton = {
         let privacyPolicyButton = UIButton()
-        privacyPolicyButton.setBackgroundImage(UIImage(named: "box"), for: .normal)
-        privacyPolicyButton.setBackgroundImage(UIImage(named: "checkBox"), for: .selected)
+        privacyPolicyButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        privacyPolicyButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        privacyPolicyButton.tintColor = UIColor(named: "RoomYellow")
+        privacyPolicyButton.addTarget(self, action: #selector(BtnEvent), for: .touchUpInside)
         return privacyPolicyButton
     }()
     
-    lazy var privacyPolicyLabel: UILabel = {
-        let privacyPolicyLabel = UILabel()
-        privacyPolicyLabel.text = "개인정보 수집 및 이용 동의 (필수)"
-        privacyPolicyLabel.textColor = UIColor(named: "Brown")!
-        privacyPolicyLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+    lazy var privacyPolicyLabel: UIButton = {
+        let privacyPolicyLabel = UIButton()
+        privacyPolicyLabel.setTitle("개인정보 수집 및 이용 동의 (필수)", for: .normal)
+        privacyPolicyLabel.setTitleColor(UIColor(named: "Brown"), for: .normal)
+        privacyPolicyLabel.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(17))
+        privacyPolicyLabel.addTarget(self, action: #selector(privacyPolicyUrl), for: .touchUpInside)
         return privacyPolicyLabel
     }()
     
     lazy var overAgeButton: UIButton = {
-        let privacyPolicyButton = UIButton()
-        privacyPolicyButton.setBackgroundImage(UIImage(named: "box"), for: .normal)
-        privacyPolicyButton.setBackgroundImage(UIImage(named: "checkBox"), for: .selected)
-        return privacyPolicyButton
+        let overAgeButton = UIButton()
+        overAgeButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        overAgeButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        overAgeButton.tintColor = UIColor(named: "RoomYellow")
+        overAgeButton.addTarget(self, action: #selector(BtnEvent), for: .touchUpInside)
+        return overAgeButton
     }()
     
-    lazy var overAgeLabel: UILabel = {
-        let privacyPolicyLabel = UILabel()
-        privacyPolicyLabel.text = "만 14세 이상입니다 (필수)"
-        privacyPolicyLabel.textColor = UIColor(named: "Brown")!
-        privacyPolicyLabel.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
-        return privacyPolicyLabel
+    lazy var overAgeLabel: UIButton = {
+        let overAgeLabel = UIButton()
+        overAgeLabel.setTitle("만 14세 이상입니다 (필수)", for: .normal)
+        overAgeLabel.setTitleColor(UIColor(named: "Brown"), for: .normal)
+        overAgeLabel.titleLabel?.font = UIFont(name: "GmarketSansMedium", size: CGFloat(17))
+        return overAgeLabel
     }()
     
     // MARK: 프로필 사진 업로드 및 회원 가입 버튼 구현
@@ -222,6 +244,7 @@ class JoinViewController: UIViewController {
         profileButton.backgroundColor = .systemYellow
         profileButton.setTitleColor(.white, for: .normal)
         profileButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        profileButton.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
         return profileButton
     }()
     
@@ -234,6 +257,7 @@ class JoinViewController: UIViewController {
         joinButton.setTitleColor(.systemGray, for: .disabled)
         joinButton.setTitleColor(.white, for: .normal)
         joinButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        joinButton.addTarget(self, action: #selector(createUser), for: .touchUpInside)
         return joinButton
     }()
 
@@ -244,9 +268,6 @@ class JoinViewController: UIViewController {
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
-        joinButton.addTarget(self, action: #selector(createUser), for: .touchUpInside)
-        profileButton.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
     }
     
     @objc func dismissKeyboard() {
@@ -256,101 +277,144 @@ class JoinViewController: UIViewController {
     @objc func createUser() {
         checkSign()
     }
-
+    
+    @objc func termsofUseUrl() {
+        let Url = NSURL(string: "https://tunahouse97.notion.site/RoomDentist-c9736ff77a234c1d984b4bb25d4ef57e")
+        let safariView: SFSafariViewController = SFSafariViewController(url: Url! as URL)
+        self.present(safariView, animated: true, completion: nil)
+    }
+    
+    @objc func privacyPolicyUrl() {
+        let Url = NSURL(string: "https://tunahouse97.notion.site/RoomDentist-23d1a9e7655e41a99ac94dcc74d97ac9")
+        let safariView: SFSafariViewController = SFSafariViewController(url: Url! as URL)
+        self.present(safariView, animated: true, completion: nil)
+    }
+    
+    @objc func BtnEvent(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if termsofUseButton.isSelected && privacyPolicyButton.isSelected && overAgeButton.isSelected {
+            checkButtonParam = true
+        } else {
+            checkButtonParam = false
+        }
+    }
+    
     func configureUI() {
-        self.view.addSubview(self.titleLabel)
-        self.view.addSubview(self.NameTextBox)
-        self.view.addSubview(self.NameTextField)
-        self.view.addSubview(self.EmailTextBox)
-        self.view.addSubview(self.EmailTextField)
-        self.view.addSubview(self.SendEmailButton)
-        self.view.addSubview(self.PwTextBox)
-        self.view.addSubview(self.PwTextField)
-        self.view.addSubview(self.PwTextRepeatBox)
-        self.view.addSubview(self.PwTextFieldRepeat)
-        self.view.addSubview(self.PwLabel)
-        self.view.addSubview(self.BirthText)
-        self.view.addSubview(self.BirthTextFieldPicker)
-        self.view.addSubview(self.genderText)
-        self.view.addSubview(self.genderSegment)
-        self.view.addSubview(self.profileButton)
-        self.view.addSubview(self.joinButton)
+        view.addSubview(self.scrollView)
+        scrollView.addSubview(self.innerView)
+        
+        self.innerView.addSubview(self.titleLabel)
+        
+        self.innerView.addSubview(self.NameTextBox)
+        self.innerView.addSubview(self.NameTextField)
+        self.innerView.addSubview(self.EmailTextBox)
+        self.innerView.addSubview(self.EmailTextField)
+        self.innerView.addSubview(self.SendEmailButton)
+        self.innerView.addSubview(self.PwTextBox)
+        self.innerView.addSubview(self.PwTextField)
+        self.innerView.addSubview(self.PwTextRepeatBox)
+        self.innerView.addSubview(self.PwTextFieldRepeat)
+        self.innerView.addSubview(self.PwLabel)
+        self.innerView.addSubview(self.BirthText)
+        self.innerView.addSubview(self.BirthTextFieldPicker)
+        self.innerView.addSubview(self.genderText)
+        self.innerView.addSubview(self.genderSegment)
+        
+        self.innerView.addSubview(self.termsofUseButton)
+        self.innerView.addSubview(self.termsofUseLabel)
+        self.innerView.addSubview(self.privacyPolicyButton)
+        self.innerView.addSubview(self.privacyPolicyLabel)
+        self.innerView.addSubview(self.overAgeButton)
+        self.innerView.addSubview(self.overAgeLabel)
+        
+        self.innerView.addSubview(self.profileButton)
+        self.innerView.addSubview(self.joinButton)
+        
+        self.scrollView.snp.makeConstraints {
+            $0.top.left.right.bottom.equalTo(self.view)
+        }
+        
+        self.innerView.snp.makeConstraints {
+            $0.top.left.right.bottom.equalTo(self.scrollView)
+            $0.height.equalTo(self.NameTextBox.snp.height).multipliedBy(12)
+            $0.width.equalTo(self.scrollView)
+        }
         
         self.titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
+            $0.top.equalTo(self.scrollView.snp.top).offset(20)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
         }
         
         self.NameTextBox.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(40)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.right.equalTo(self.innerView.snp.right).inset(20)
         }
         
         self.NameTextField.snp.makeConstraints {
             $0.centerX.equalTo(self.NameTextBox.snp.centerX)
             $0.centerY.equalTo(self.NameTextBox.snp.centerY)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+            $0.left.equalTo(self.innerView.snp.left).inset(40)
+            $0.right.equalTo(self.innerView.snp.right).inset(40)
         }
         
         self.EmailTextBox.snp.makeConstraints {
             $0.top.equalTo(NameTextBox.snp.bottom).offset(10)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.right.equalTo(self.innerView.snp.right).inset(20)
             $0.height.equalTo(60)
         }
         
         self.EmailTextField.snp.makeConstraints {
             $0.centerX.equalTo(self.EmailTextBox.snp.centerX)
             $0.centerY.equalTo(self.EmailTextBox.snp.centerY)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+            $0.left.equalTo(self.innerView.snp.left).inset(40)
+            $0.right.equalTo(self.innerView.snp.right).inset(40)
         }
         
         self.SendEmailButton.snp.makeConstraints {
             $0.top.equalTo(self.EmailTextBox.snp.bottom).offset(10)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.right.equalTo(self.innerView.snp.right).inset(20)
         }
         
         self.PwTextBox.snp.makeConstraints {
-            $0.top.equalTo(self.SendEmailButton.snp.bottom).offset(20)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.top.equalTo(self.SendEmailButton.snp.bottom).offset(10)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.right.equalTo(self.innerView.snp.right).inset(20)
         }
 
         self.PwTextField.snp.makeConstraints {
             $0.centerX.equalTo(self.PwTextBox.snp.centerX)
             $0.centerY.equalTo(self.PwTextBox.snp.centerY)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+            $0.left.equalTo(self.innerView.snp.left).inset(40)
+            $0.right.equalTo(self.innerView.snp.right).inset(40)
         }
         
         self.PwTextRepeatBox.snp.makeConstraints {
             $0.top.equalTo(PwTextBox.snp.bottom).offset(10)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.right.equalTo(self.innerView.snp.right).inset(20)
         }
         
         self.PwTextFieldRepeat.snp.makeConstraints {
             $0.centerX.equalTo(self.PwTextRepeatBox.snp.centerX)
             $0.centerY.equalTo(self.PwTextRepeatBox.snp.centerY)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(40)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(40)
+            $0.left.equalTo(self.innerView.snp.left).inset(40)
+            $0.right.equalTo(self.innerView.snp.right).inset(40)
         }
         
         self.PwLabel.snp.makeConstraints {
             $0.top.equalTo(self.PwTextRepeatBox.snp.bottom).offset(10)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.right.equalTo(self.innerView.snp.right).offset(-20)
         }
         
         self.BirthText.snp.makeConstraints {
             $0.top.equalTo(self.PwLabel.snp.bottom).offset(20)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            $0.left.equalTo(self.innerView.snp.left).offset(20)
             $0.right.equalTo(self.BirthTextFieldPicker.snp.left).offset(-20)
         }
         
@@ -370,19 +434,54 @@ class JoinViewController: UIViewController {
             $0.left.equalTo(self.genderText.snp.right).offset(20)
         }
         
-        self.profileButton.snp.makeConstraints {
+        // MARK: 약관 구현
+        self.termsofUseButton.snp.makeConstraints {
             $0.top.equalTo(self.genderSegment.snp.bottom).offset(30)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.width.height.size.equalTo(30)
+        }
+        
+        self.termsofUseLabel.snp.makeConstraints {
+            $0.left.equalTo(self.termsofUseButton.snp.right).offset(10)
+            $0.centerY.equalTo(self.termsofUseButton.snp.centerY)
+        }
+        
+        self.privacyPolicyButton.snp.makeConstraints {
+            $0.top.equalTo(self.termsofUseButton.snp.bottom).offset(15)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.width.height.size.equalTo(30)
+        }
+        
+        self.privacyPolicyLabel.snp.makeConstraints {
+            $0.left.equalTo(self.privacyPolicyButton.snp.right).offset(10)
+            $0.centerY.equalTo(self.privacyPolicyButton.snp.centerY)
+        }
+        
+        self.overAgeButton.snp.makeConstraints {
+            $0.top.equalTo(self.privacyPolicyButton.snp.bottom).offset(15)
+            $0.left.equalTo(self.innerView.snp.left).inset(20)
+            $0.width.height.size.equalTo(30)
+        }
+        
+        self.overAgeLabel.snp.makeConstraints {
+            $0.left.equalTo(self.overAgeButton.snp.right).offset(10)
+            $0.centerY.equalTo(self.overAgeButton.snp.centerY)
+        }
+        
+        // MARK: 프로필 사진 업로드 및 회원 가입 버튼 구현
+        self.profileButton.snp.makeConstraints {
+            $0.top.equalTo(self.overAgeButton.snp.bottom).offset(30)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
+            $0.left.equalTo(self.innerView.snp.left).offset(20)
+            $0.right.equalTo(self.innerView.snp.right).offset(-20)
             $0.height.equalTo(45)
         }
         
         self.joinButton.snp.makeConstraints {
             $0.top.equalTo(self.profileButton.snp.bottom).offset(10)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide.snp.centerX)
-            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.centerX.equalTo(self.innerView.snp.centerX)
+            $0.left.equalTo(self.innerView.snp.left).offset(20)
+            $0.right.equalTo(self.innerView.snp.right).offset(-20)
             $0.height.equalTo(45)
         }
     }
@@ -398,6 +497,7 @@ extension JoinViewController {
     }
     
     @objc func uploadPhoto() {
+        print("눌림")
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self //3
@@ -405,8 +505,12 @@ extension JoinViewController {
         present(imagePicker, animated: true)
     }
     
+    @objc func sendEmailCheck() {
+        // code -> 추후 이메일 인증 구현 시
+    }
+    
     func segmentValueUpdate() {
-        var check = genderSegment.selectedSegmentIndex
+        let check = genderSegment.selectedSegmentIndex
         if check == 0 {
             self.genderText.text = "남성"
         } else {
@@ -536,7 +640,7 @@ extension JoinViewController {
                         print(ErrorCode)
                     }
                 }
-            } else{
+            } else {                
                 self?.showAlert(message: "회원가입 성공")
                 self?.saveUserData()
                 self?.saveUserProfileImage(img: self!.profileImage)

@@ -25,6 +25,7 @@ class CameraViewController: UIViewController {
     let photoOutput = AVCapturePhotoOutput()
     var DateModels = DateModel()
     var imageCount = 0
+    var isCavity: Bool = false
     
     let sessionQueue = DispatchQueue(label: "sesstion Queue")
     let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInWideAngleCamera, .builtInTrueDepthCamera], mediaType: .video, position: .unspecified) // 앞에꺼인지, 뒤에꺼인지 아직 안정해서
@@ -50,6 +51,7 @@ class CameraViewController: UIViewController {
         setupUI()
         // MARK: 저장하기 전 사진 개수 파악
         refreshCount()
+        print("확인용 : \(isCavity)")
     }
     
     func setupUI() {
@@ -258,7 +260,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             let cameraImage: UIImage = pickedImage
-            DataModel.saveUserImage(date: DateModels.date, img: cameraImage, imageCount: self.imageCount)
+            DataModel.saveUserImage(date: DateModels.date, img: cameraImage, imageCount: self.imageCount, isCavity: isCavity)
         } else {
             dismiss(animated: true, completion: nil)
         }

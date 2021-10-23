@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     var DateModels = DateModel()
     var count = 0 // 서버에서 받아오는 사진 개수
     var imageArray: [UIImage] = [UIImage(named: "RoomDentist.png")!]
+    var isCavity: Bool = false
     
     @IBOutlet weak var circleImage: UIImageView!
     lazy var profileImage: UIImageView = {
@@ -125,6 +126,19 @@ class MainViewController: UIViewController {
         return noticeLabel
     }()
     
+    lazy var switchButton: UIButton = {
+        let switchButton = UIButton()
+        switchButton.layer.cornerRadius = 10
+        switchButton.backgroundColor = UIColor(named: "SignatureBlack")
+        switchButton.setTitleColor(.white, for: .normal)
+        switchButton.setTitleColor(UIColor(named: "RoomYellow"), for: .selected)
+        switchButton.setTitle("치아", for: .normal)
+        switchButton.setTitle("치주", for: .selected)
+        switchButton.titleLabel?.font = UIFont(name: "GmarketSansBold", size: CGFloat(17))
+        switchButton.addTarget(self, action: #selector(switchMode(_:)), for: .touchUpInside)
+        return switchButton
+    }()
+    
     lazy var cameraButton: UIButton = {
         let cameraButton = UIButton()
         cameraButton.layer.cornerRadius = 10
@@ -168,7 +182,9 @@ class MainViewController: UIViewController {
     
     // MARK: 캘린더 버튼 클릭 구현
     @objc func calendarEvent() {
-        // code
+        guard let VC = storyboard?.instantiateViewController(identifier: "ChartViewController") as? ChartViewController else { return }
+        VC.uid = userData.uid
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
     // MARK: 지도 버튼 클릭 구현
@@ -211,10 +227,19 @@ class MainViewController: UIViewController {
         refreshCount()
     }
     
+    @objc func switchMode(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected == true {
+            isCavity = false
+        } else {
+            isCavity = true
+        }
+    }
+    
     @objc func cameraButtonEvent() {
-        print("캡쳐")
-        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "CameraViewController")
-        self.navigationController?.pushViewController(pushVC!, animated: true)
+        guard let VC = storyboard?.instantiateViewController(identifier: "CameraViewController") as? CameraViewController else { return }
+        VC.isCavity = self.isCavity
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
     @objc func photoLibraryButtonEvent() {
@@ -241,6 +266,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(self.forwardButton)
         self.view.addSubview(self.ResultView)
         self.view.addSubview(self.noticeLabel)
+        self.view.addSubview(self.switchButton)
         self.view.addSubview(self.cameraButton)
         self.view.addSubview(self.photoLibraryButton)
         
@@ -309,17 +335,25 @@ class MainViewController: UIViewController {
             $0.centerX.equalTo(self.ResultView.snp.centerX)
         }
         
-        self.cameraButton.snp.makeConstraints {
+        self.switchButton.snp.makeConstraints {
             $0.bottom.equalTo(self.view).inset(20)
             $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).inset(20)
-            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.5).offset(-25)
+            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.2).offset(-25)
+            $0.height.equalTo(45)
+        }
+        
+        self.cameraButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.view).inset(20)
+            $0.left.equalTo(self.switchButton.snp.right).offset(10)
+//            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.3).offset(-25)
+            $0.right.equalTo(self.photoLibraryButton.snp.left).offset(-10)
             $0.height.equalTo(45)
         }
         
         self.photoLibraryButton.snp.makeConstraints {
             $0.bottom.equalTo(self.view).inset(20)
             $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).inset(20)
-            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.5).offset(-25) // 사이즈 계산 : 전체 화면 / 2 - 양여백 20씩 - 중간 여백 10
+            $0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width).multipliedBy(0.47).offset(-25) // 사이즈 계산 : 전체 화면 / 2 - 양여백 20씩 - 중간 여백 10
             $0.height.equalTo(45)
         }
     }
@@ -339,7 +373,7 @@ extension MainViewController {
             let value = snapshot.value as? NSDictionary
             self.userData.name = value?["username"] as? String ?? "홍길동"
             self.userData.gender = value?["gender"] as? String ?? "남성"
-            self.userData.birth = value?["birth"] as? String ?? ""
+            self.userData.birth = value?["birth"] as? String ?? "1997/11/20"
 
             // MARK: 나이 계산
             let calendar = Calendar.current
@@ -493,7 +527,11 @@ extension MainViewController: UICollectionViewDataSource {
         
         DataModel.checkDatabase(uid: userData.uid, date: DateModels.date) { results in
             DispatchQueue.main.async {
-                cell.resultLabel.text = "충치 개수 : \(results[indexPath.row].cavity)개\n\n아말감 개수 : \(results[indexPath.row].amalgam)개\n\n금니 개수 : \(results[indexPath.row].gold)개"
+                if results[indexPath.row].isCavity == "True" {
+                    cell.resultLabel.text = "충치 개수 : \(results[indexPath.row].cavity)개\n\n아말감 개수 : \(results[indexPath.row].amalgam)개\n\n금니 개수 : \(results[indexPath.row].gold)개"
+                } else {
+                    cell.resultLabel.text = "치석 확인"
+                }
             }
         }
         
@@ -521,7 +559,7 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            DataModel.saveUserImage(date: DateModels.date, img: pickedImage, imageCount: self.count)
+            DataModel.saveUserImage(date: DateModels.date, img: pickedImage, imageCount: self.count, isCavity: isCavity)
         } else {
             dismiss(animated: true, completion: nil)
         }

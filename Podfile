@@ -10,7 +10,6 @@ target 'RoomDentist' do
   pod 'Firebase/Auth', '~> 8.4.0'
   pod 'Firebase/Database', '~> 8.4.0'
   pod 'Firebase/Storage', '~> 8.4.0'
-  pod 'TextFieldEffects'
   pod 'Alamofire', '~> 5.4'
   pod 'Charts'
   pod 'RxSwift', '6.2.0'

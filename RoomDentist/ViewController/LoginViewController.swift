@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 import Firebase
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -100,6 +101,7 @@ class LoginViewController: UIViewController {
     lazy var googleLoginButton: UIButton = {
         let googleLoginButton = UIButton()
         googleLoginButton.setImage(UIImage(named: "Google.png"), for: .normal)
+//        googleLoginButton.addTarget(self, action: #selector(loginGoogle), for: .touchUpInside)
         return googleLoginButton
     }()
     
@@ -132,7 +134,59 @@ class LoginViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-        
+    
+//    @objc func loginGoogle() {
+//        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+//
+//        // Create Google Sign In configuration object.
+//        let config = GIDConfiguration(clientID: clientID)
+//
+//        // Start the sign in flow!
+//        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+//
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }
+//
+//            guard let authentication = user?.authentication, let idToken = authentication.idToken else {
+//                return
+//            }
+//
+//            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+//
+//            Auth.auth().signIn(with: credential) { (authResult, error) in
+//                if error != nil {
+//                    if let ErrorCode = AuthErrorCode(rawValue: (error?._code)!) {
+//                        switch ErrorCode {
+//                        case AuthErrorCode.operationNotAllowed:
+//                            self.showAlert(message: "유효하지 않은 접근 입니다")
+//                        case AuthErrorCode.userDisabled:
+//                            self.showAlert(message: "정지된 계정입니다. 관리자에게 문의해주세요")
+//                        case AuthErrorCode.invalidEmail:
+//                            self.showAlert(message: "이메일을 다시한번 확인해 주세요")
+//                        case AuthErrorCode.wrongPassword:
+//                            self.showAlert(message: "비밀번호가 틀렸습니다.")
+//                        default:
+//                            self.showAlert(message: "이메일 또는 비밀번호를 다시한번 확인해 주세요")
+//                        }
+//                    }
+//                } else {
+//                    let db = Database.database().reference()
+//                    let uid = Auth.auth().currentUser?.uid
+//                    let dataMap = [
+//                        "username": user.profile.name,
+//                        "email": user.profile.email,
+//                        "birth": user.profile.,
+//                        "gender": genderText.text
+//                    ]
+//                    db.child("users").child(uid!).setValue(dataMap)
+//                    self.pushNavigationControllerToMain()
+//                }
+//            }
+//        }
+//    }
+    
     func configureUI() {
         self.view.addSubview(self.mainLogoImage)
         self.view.addSubview(self.EmailTextBox)

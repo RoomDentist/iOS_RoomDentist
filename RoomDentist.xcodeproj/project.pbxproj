@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537728270F210F00560AA1 /* DefaultStyle.swift */; };
 		7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753772A270F26C500560AA1 /* LoginSegue.swift */; };
 		77537732271084A300560AA1 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77537731271084A300560AA1 /* UserData.swift */; };
+		77545E7327242B3E00438ABA /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77545E7227242B3E00438ABA /* ChartViewController.swift */; };
 		776218822719C7AB00120573 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776218812719C7AB00120573 /* DataModel.swift */; };
 		77621884271AD51A00120573 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77621883271AD51A00120573 /* ImageViewController.swift */; };
 		779B6C0D271181D500016865 /* DateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B6C0C271181D500016865 /* DateModel.swift */; };
@@ -59,6 +60,7 @@
 		77537728270F210F00560AA1 /* DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStyle.swift; sourceTree = "<group>"; };
 		7753772A270F26C500560AA1 /* LoginSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSegue.swift; sourceTree = "<group>"; };
 		77537731271084A300560AA1 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		77545E7227242B3E00438ABA /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		776218812719C7AB00120573 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		77621883271AD51A00120573 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		779B6C0C271181D500016865 /* DateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateModel.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				77390AFD26A84F17004100E3 /* LoginViewController.swift */,
+				77545E7227242B3E00438ABA /* ChartViewController.swift */,
 				7732117F2700D0E300B27A46 /* ResetIDViewController.swift */,
 				7737134926A9CB5800EE6523 /* JoinViewController.swift */,
 				7737134B26AAD57600EE6523 /* MainViewController.swift */,
@@ -344,6 +347,7 @@
 				779B6C0F2711C6F200016865 /* CustomViewAnimation.swift in Sources */,
 				7753772B270F26C500560AA1 /* LoginSegue.swift in Sources */,
 				77390AFE26A84F17004100E3 /* LoginViewController.swift in Sources */,
+				77545E7327242B3E00438ABA /* ChartViewController.swift in Sources */,
 				77537729270F210F00560AA1 /* DefaultStyle.swift in Sources */,
 				776218822719C7AB00120573 /* DataModel.swift in Sources */,
 				77390AFA26A84F17004100E3 /* AppDelegate.swift in Sources */,

@@ -78,8 +78,26 @@ class DataModel {
         }
     }
     
+    // MARK: 이미지 Firebase Storage 업로드
+    static func saveUserImage(date: String, img: UIImage, imageCount: Int, isCavity: Bool) {
+        var data = Data()
+        data = img.jpegData(compressionQuality: 1)!
+        let filePath = Auth.auth().currentUser?.uid
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/png"
+        print("[카메라뷰] 저장 전 이미지 개수는? : \(imageCount)")
+        storage.child(filePath!).child("\(date)").child("\(imageCount + 1).png").putData(data, metadata: metaData) { (metaData, error) in if let error = error {
+                print(error.localizedDescription)
+                return
+            } else {
+                print("[카메라뷰] 업로드 성공")
+                DataModel.postData(uid: "\(filePath!)", imageCount: imageCount + 1, isCavity: isCavity)
+            }
+        }
+    }
+    
     // MARK: uid, imageCount Flask 서버로 전송
-    static func postData(uid: String, imageCount: Int) {
+    static func postData(uid: String, imageCount: Int, isCavity: Bool) {
         let url = "https://roomdentist.tunahouse97.com/Auth"
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
@@ -87,7 +105,7 @@ class DataModel {
         request.timeoutInterval = 10
         
         // POST 로 보낼 정보
-        let params = ["uid": "\(uid)", "numbers": "\(imageCount)"] as Dictionary
+        let params = ["uid": "\(uid)", "numbers": "\(imageCount)", "isCavity": "True"] as Dictionary
 
         // httpBody 에 parameters 추가
         do {
@@ -105,43 +123,23 @@ class DataModel {
             }
         }
     }
-
-    
-    // MARK: 이미지 Firebase Storage 업로드
-    static func saveUserImage(date: String, img: UIImage, imageCount: Int) {
-        var data = Data()
-        data = img.jpegData(compressionQuality: 1)!
-        let filePath = Auth.auth().currentUser?.uid
-        let metaData = StorageMetadata()
-        metaData.contentType = "image/png"
-        print("[카메라뷰] 저장 전 이미지 개수는? : \(imageCount)")
-        storage.child(filePath!).child("\(date)").child("\(imageCount + 1).png").putData(data, metadata: metaData) { (metaData, error) in if let error = error {
-                print(error.localizedDescription)
-                return
-            } else {
-                print("[카메라뷰] 업로드 성공")
-                DataModel.postData(uid: "\(filePath!)", imageCount: imageCount + 1)
-            }
-        }
-    }
-}
-
-struct Value: Codable {
-    let results: [Results]?
 }
 
 struct Results: Codable {
     let amalgam, cavity, gold: Int
+    let isCavity: String
 
     enum CodingKeys: String, CodingKey {
         case amalgam = "Amalgam"
         case cavity = "Cavity"
         case gold = "Gold"
+        case isCavity
     }
     
     init() {
         amalgam = -1
         cavity = -1
         gold = -1
+        isCavity = ""
     }
 }
