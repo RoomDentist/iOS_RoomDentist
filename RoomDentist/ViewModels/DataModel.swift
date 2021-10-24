@@ -98,6 +98,7 @@ class DataModel {
     
     // MARK: uid, imageCount Flask 서버로 전송
     static func postData(uid: String, imageCount: Int, isCavity: Bool) {
+        print("테스트 보내기 : \(isCavity)")
         let url = "https://roomdentist.tunahouse97.com/Auth"
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
@@ -105,7 +106,7 @@ class DataModel {
         request.timeoutInterval = 10
         
         // POST 로 보낼 정보
-        let params = ["uid": "\(uid)", "numbers": "\(imageCount)", "isCavity": "True"] as Dictionary
+        let params = ["uid": "\(uid)", "numbers": "\(imageCount)", "isCavity": "\(isCavity)"] as Dictionary
 
         // httpBody 에 parameters 추가
         do {
