@@ -18,7 +18,7 @@
 2021 SSU Graduate Project: iOS App RoomDentist
 <br>
 
-###이번 iOS 제작 목표
+### 이번 iOS 제작 목표
 
 1. MVVM패턴을 적용하여 제작
 2. 또한 지금까지 사용해보지 못한 RxSwift, RxCocoa 적용 ➡️ Refactoring 진행 중
@@ -26,12 +26,13 @@
 
 ### 서비스 구현 필수 페이지
 
-[RoomDentist 이용약관 ](https://www.notion.so/RoomDentist-c9736ff77a234c1d984b4bb25d4ef57e)
+[RoomDentist 이용약관 ](https://www.notion.so/RoomDentist-c9736ff77a234c1d984b4bb25d4ef57e) <br>
 [RoomDentist 개인정보처리방침](https://www.notion.so/RoomDentist-23d1a9e7655e41a99ac94dcc74d97ac9)
 <br>
 
 ### 개발일지
 [노션 링크](https://www.notion.so/tunahouse97/RoomDentist-713a42d76f4d47c89283a07203e58387)
+<br>
 
 ### 졸업작품 간략 내용
 ![대지 1](https://user-images.githubusercontent.com/50114556/140939379-348cc5af-9df9-4060-9ee0-e351f69b41d9.png)
